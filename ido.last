@@ -1,0 +1,31 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/" . "cimentadaj/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/cimentadaj/.emacs.d/"
+ "/Users/cimentadaj/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "init.el"
+ "README.org"
+ "emacs_keys.txt"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/cimentadaj/.emacs.d/" (23785 38102 30532 390000) "README.org" "elpa/" "init.el" "auto-save-list/" "tutorial/" "init.el~" "README.org~" "ido.last" "../" "./")
+
+ ("/Users/" (23093 40757 711106 833000) "cimentadaj/" "Guest/" "Shared/" ".localized" "../" "./")
+
+ ("/Users/cimentadaj/" (23784 62592 614108 930000) "PSID-Analysis/" ".enthought/" "third_file/" ".canopy/" ".conda/" "try_terror/" ".zlogin" "my_dir/" "test.dta" "quickstart.py" "#1.org#" ".viminfo" ".bash_history" "mynewtext.txt" "miniconda2/" "1.org~" "emacs_keys.txt~" ".gitconfig" ".cache/" ".python_history" "Downloads/" "anaconda3/" "test.md" ".gem/" ".bash_profile" ".spss/" "2.org" ".mysql_history" ".rstudio-desktop/" "2017-10-24-thesis-template.Rmd" "plot.png" "Documents/" "1.org" ".npm/" ".credentials/" ".swo" ".keras/" ".jupyter/" ".ipynb_checkpoints/" ".Trash/" ".Rcache/" ".Rapp.history" ".emacs~" ".anaconda_backup/" "example.txt" "try/" "reardon_implementation.R" ".ghc/" ".profile" "Applications/" "Movies/" ".ssh/" ".theano/" ".anaconda/" ".odbc.ini" "mexico/" "RtmpS6pvQu" ".bash_profile-miniconda2.bak" ".torch/" "macports/" ".emacs_bkup~" ".cisco/" "PERCE/" "test.Rmd" ".bash_profile-anaconda3.bak" "Public/" ".bash_profile-anaconda2.bak" "enthought/" "thesis_template.Rmd" ".sqlite_history" "Google Drive/" "Rseminars-master.zip" ".bash_sessions/" ".gitignore_global" "emacs_keys.txt" ".emacs.d/" ".enstaller4rc" ".oracle_jre_usage/" "youtube" ".bash_profile.macports-saved_2017-06-27_at_13:47:59" ".lesshst" ".mkshrc" "all_variables.txt" ".matplotlib/" "Bases de datos texto/" "Library/" "Desktop/" ".rvm/" ".ipython/" ".bundle/" "childpvt-gini.png" ".atom/" "client_secret.json" "try3/" "mynewertext.txt" "mynewfile.txt" "Pictures/" "figure/" ".python_history-10074.tmp" "random.cpp" ".swp" "api_script.R" ".zshrc" "Untitled.ipynb" "test.R" ".bashrc" "#3.org#" "plot_pisa.png" ".subversion/" ".cabal/" ".qgis2/" "greeting2.txt" ".wget-hsts" ".hgignore_global" ".Rprofile" "TUTORIAL~" "test/" ".CFUserTextEncoding" "empty/" "Bases escritura/" "Downloads.Renviron" "blog-articles/" ".gnupg/" ".R/" ".DS_Store" "Untitled1.ipynb" ".virtualenvs/" "TUTORIAL" ".gnupg_pre_2.1/" "rJava_0.9-8.tar.gz" "2.org~" "mush.data" ".docker/" ".condarc" ".emacs_bkup" "Music/" ".Renviron" "Rseminars-master/" ".Rhistory" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
