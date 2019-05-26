@@ -116,15 +116,14 @@
   :ensure t
   :config (load-theme 'spacemacs-dark t))
 
+(set-face-attribute 'default nil :font "Monaco-13")
 
 ;; Load ESS
-
 (use-package ess
   :ensure t
   :init (require 'ess-site))
 
 ;; Make Shift-Enter do a lot in ESS
-
 (setq ess-ask-for-ess-directory nil)
 (add-hook 'inferior-ess-mode-hook
     '(lambda nil
@@ -166,8 +165,7 @@
 ;; parapgraph or a function. However, I couldn't get it to work and now I use
 ;; C-c C-c which executes it as I want it.
 ;;      (call-interactively 'ess-eval-region-or-function-or-paragraph-and-step)))
-
-  (Add-hook 'ess-mode-hook
+  (add-hook 'ess-mode-hook
             '(lambda()
                (local-set-key [(shift return)] 'my-ess-eval)))
   (add-hook 'inferior-ess-mode-hook
@@ -179,3 +177,7 @@
              (local-set-key [(shift return)] 'my-ess-eval)))
  (require 'ess-site)
 
+;; On startup
+
+;; Open TODO list
+(find-file "~/Google Drive/gtd/inbox.org")
