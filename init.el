@@ -10,7 +10,7 @@
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(package-selected-packages
    (quote
-    (ewal-spacemacs-them ewal-spacemacs-themes dracula-theme ewal-spacemacs-theme spacemacs-theme counsel swiper ace-window org-bullets which-key try use-package))))
+    (color-theme-modern ewal-spacemacs-them ewal-spacemacs-themes dracula-theme ewal-spacemacs-theme spacemacs-theme counsel swiper ace-window org-bullets which-key try use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -108,14 +108,14 @@
     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
     ))
 
+
 ;; Set spacemacs theme
 ;; This is a bit weird because the package is actually 'spacemacs-theme'
 ;; but I can't find it on MELPA through emacs (although it is on melpa.org)
 ;; However, this ewal-spacemacs-themes seems to work
 (use-package ewal-spacemacs-themes
-  :ensure t
-  :config (load-theme 'spacemacs-dark t))
-
+ :ensure t
+ :config (load-theme 'spacemacs-dark t))
 
 ;; Load ESS
 
@@ -162,6 +162,7 @@
     (if (and transient-mark-mode mark-active)
         (call-interactively 'ess-eval-region)
       (call-interactively 'ess-eval-line-and-step)))
+
 ;; I was trying to add that whenever it finds a paragraph it executes the complete
 ;; parapgraph or a function. However, I couldn't get it to work and now I use
 ;; C-c C-c which executes it as I want it.
