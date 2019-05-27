@@ -7,12 +7,14 @@
 
 ;; ----- ido-work-directory-list -----
 (
+ "/Users/cimentadaj/Downloads/gitrepo/sqp_ess_correction_simplified/shiny/sqp_correct/"
  "/Users/cimentadaj/"
  "/Users/cimentadaj/.emacs.d/"
 )
 
 ;; ----- ido-work-file-list -----
 (
+ "global.R"
  "emacs_keys.txt"
  "init.el"
  "README.org"
@@ -20,6 +22,8 @@
 
 ;; ----- ido-dir-file-cache -----
 (
+ ("/Users/cimentadaj/Downloads/gitrepo/sqp_ess_correction_simplified/shiny/sqp_correct/" (23787 49995 270469 769000) "server.R" ".#server.R" "language_country_table.csv" "#server.R#" "global.R" "ui.R" "rsconnect/" "../" "./")
+
  ("/Users/cimentadaj/.emacs.d/" (23786 54182 961671 564000) ".git/" "elpa/" "recentf" "init.el" "auto-save-list/" "recentf~" "ido.last~" "tutorial/" "init.el~" "README.org~" "ido.last" "../" "./")
 
  ("/Users/cimentadaj/.emacs.d/auto-save-list/" (23786 20392 166180 860000) ".saves-5557-cimentadaj.local~" "../" "./")

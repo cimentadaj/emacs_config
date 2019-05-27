@@ -10,7 +10,7 @@
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(package-selected-packages
    (quote
-    (ewal-spacemacs-them ewal-spacemacs-themes dracula-theme ewal-spacemacs-theme spacemacs-theme counsel swiper ace-window org-bullets which-key try use-package))))
+    (helm helm-core org-ref auto-complete moe-theme smartparens smartparents ewal-spacemacs-them ewal-spacemacs-themes dracula-theme ewal-spacemacs-theme spacemacs-theme counsel swiper ace-window org-bullets which-key try use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -18,7 +18,7 @@
  ;; If there is more than one, they won't work right.
  '(aw-leading-char-face ((t (:inherit- ace-jump-face-foreground :height 3.0)))))
 
-
+(setq default-directory "~/")
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 
@@ -54,6 +54,7 @@
 (setq ido-create-new-buffer 'always)
 (ido-mode 1
 )
+
 ;; Org-mode
 (use-package org-bullets
   :ensure t
@@ -61,6 +62,16 @@
   (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
 (defalias 'list-buffers 'ibuffer)
+
+;;------------------------------------------------------------------------------
+;; `org-ref':
+;;------------------------------------------------------------------------------
+(use-package org-ref
+  :ensure t
+  :config
+  (setq org-ref-bibliography-notes "~/Google Drive/literature/notes.org"
+        org-ref-default-bibliography  '("~/Google Drive/literature/references.bib")
+        org-ref-pdf-directory "~/Google Drive/literature/pdfs/"))
 
 ;; Package to place numbers on the windows to switch
 ;; quicker
@@ -112,16 +123,56 @@
 ;; This is a bit weird because the package is actually 'spacemacs-theme'
 ;; but I can't find it on MELPA through emacs (although it is on melpa.org)
 ;; However, this ewal-spacemacs-themes seems to work
-(use-package ewal-spacemacs-themes
+;; (use-package ewal-spacemacs-themes
+;;   :ensure t
+;;   :config (load-theme 'spacemacs-dark t))
+
+(use-package moe-theme
   :ensure t
-  :config (load-theme 'spacemacs-dark t))
+  :config
+  (setq moe-theme-highlight-buffer-id t)
+  (moe-dark))
 
 (set-face-attribute 'default nil :font "Monaco-13")
+
+
+;; Install smartparens for adding parens when typing
+(use-package smartparens
+  :ensure t
+  :config (smartparens-global-mode t))
+
+;; Show line numbering on all buffers
+;; Ideally, I'd like only line numbering
+;; on the left buffers but I don't know
+;; how to do it.
+(global-display-line-numbers-mode 1)
 
 ;; Load ESS
 (use-package ess
   :ensure t
   :init (require 'ess-site))
+
+;; Use auto completion with auto-complete
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)
+    ))
+
+;;  (define-key ac-completing-map [tab] 'ac-complete)
+;;  (define-key ac-completing-map [return] nil)
+
+;; (setq ess-default-style 'RStudio)
+;; (setq ess-use-auto-complete t)
+
+;; Don't restore history or save on exit
+(setq-default inferior-R-args "--no-restore-history --no-save")
+
+;; Smartparens in R repl
+(add-hook 'ess-R-post-run-hook (lambda () (smartparens-mode 1)))
+(add-hook 'inferior-ess-mode-hook (lambda () (smartparens-mode 1)))
 
 ;; Make Shift-Enter do a lot in ESS
 (setq ess-ask-for-ess-directory nil)
@@ -155,29 +206,48 @@
         (set-window-buffer w2 "*R*")
         (set-window-buffer w1 w1name))))
 
-  (defun my-ess-eval ()
-    (interactive)
-    (my-ess-start-R)
-    (if (and transient-mark-mode mark-active)
-        (call-interactively 'ess-eval-region)
-      (call-interactively 'ess-eval-line-and-step)))
-;; I was trying to add that whenever it finds a paragraph it executes the complete
-;; parapgraph or a function. However, I couldn't get it to work and now I use
-;; C-c C-c which executes it as I want it.
-;;      (call-interactively 'ess-eval-region-or-function-or-paragraph-and-step)))
-  (add-hook 'ess-mode-hook
-            '(lambda()
-               (local-set-key [(shift return)] 'my-ess-eval)))
-  (add-hook 'inferior-ess-mode-hook
-            '(lambda()
-               (local-set-key [C-up] 'comint-previous-input)
-               (local-set-key [C-down] 'comint-next-input)))
- (add-hook 'Rnw-mode-hook
-          '(lambda()
-             (local-set-key [(shift return)] 'my-ess-eval)))
- (require 'ess-site)
+;; Bind M-enter to ess-eval-region-or-line-and-step
+;; (define-key ess-mode-map (kbd "M-<return>") 'ess-eval-region-or-line-and-step)
+
+
+;;   (defun my-ess-eval ()
+;;     (interactive)
+;;     (my-ess-start-R)
+;;     (if (and transient-mark-mode mark-active)
+;;         (call-interactively 'ess-eval-region)
+;;       (call-interactively 'ess-eval-line-and-step)))
+;; ;; I was trying to add that whenever it finds a paragraph it executes the complete
+;; ;; parapgraph or a function. However, I couldn't get it to work and now I use
+;; ;; C-c C-c which executes it as I want it.
+;; ;;      (call-interactively 'ess-eval-region-or-function-or-paragraph-and-step)))
+;;   (add-hook 'ess-mode-hook
+;;             '(lambda()
+;;                (local-set-key [(shift return)] 'my-ess-eval)))
+;;   (add-hook 'inferior-ess-mode-hook
+;;             '(lambda()
+;;                (local-set-key [C-up] 'comint-previous-input)
+;;                (local-set-key [C-down] 'comint-next-input)))
+;;  (add-hook 'Rnw-mode-hook
+;;           '(lambda()
+;;              (local-set-key [(shift return)] 'my-ess-seval)))
+;;  (require 'ess-site)
+
+
+;; Add load Shiny shortcut
+(defun ess-r-shiny-run-app (&optional arg)
+  "Interface for `shiny::runApp()'.
+   With prefix ARG ask for extra args."
+  (interactive)
+  (inferior-ess-r-force)
+  (ess-eval-linewise
+   "shiny::runApp(\".\")\n" "Running app" arg
+   '("" (read-string "Arguments: " "recompile = TRUE"))))
+
+;; avy for moving quickly through files
+(use-package avy
+  :ensure t
+  :bind ("M-s" . avy-goto-char-2))
 
 ;; On startup
-
 ;; Open TODO list
 (find-file "~/Google Drive/gtd/inbox.org")
