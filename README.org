@@ -1,0 +1,5 @@
+#+Title: Steps to install my emacs configuration
+
+1. Clone the repository into your =~/.emacs.d/= folder
+2. Change the directories (they all start with =~=, so just search)
+3. Load emacs.
