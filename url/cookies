@@ -2,25 +2,30 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '((".nih.gov"
-  [url-cookie "ncbi_sid" "CE8933F6CEC16F81_0535SID" "Wed, 27 May 2020 16:57:28 GMT" "/" ".nih.gov" nil])
- (".nlm.nih.gov"
-  [url-cookie "WebEnv" "1t_IjezK40sLNBrv4e2qLOg99M2hkQeIy1aTwLPIu6a0t14Bwqf7et9ofaS95nN3H0VduRF9DDldbG4R-Zf4vcVxk6zu84WfnAjkF%40CE8933F6CEC16F81_0535SID" "Tue, 28 May 2019 00:57:28 GMT" "/" ".nlm.nih.gov" nil])
- (".sciencedirect.com"
-  [url-cookie "EUID" "0edffb13-fe73-4517-a1de-3b6d02821269" "Fri, 27 May 2039 17:03:53 GMT" "/" ".sciencedirect.com" nil]
-  [url-cookie "id_ab" "C:5" "Fri, 27 May 2039 17:03:55 GMT" "/" ".sciencedirect.com" nil])
- ("linkinghub.elsevier.com"
-  [url-cookie "visitorId" "QWFSkznYORZL7xJ5pu9N" "Sat Jun 14 20:18:03 2087 GMT" "/" "linkinghub.elsevier.com" nil])
+ '((".doi.org"
+  [url-cookie "__cfduid" "d42139ab8352987e75fa614ee331e78b01558976087" "Tue, 26-May-20 16:54:47 GMT" "/" ".doi.org" nil])
  ("www.jstor.org"
   [url-cookie "UUID" "9dfe771b-e3d2-48bd-bf5f-3f15adf2f701" "Thu May 26 13:16:00 2022 GMT" "/" "www.jstor.org" nil])
- (".doi.org"
-  [url-cookie "__cfduid" "d42139ab8352987e75fa614ee331e78b01558976087" "Tue, 26-May-20 16:54:47 GMT" "/" ".doi.org" nil]))
+ ("linkinghub.elsevier.com"
+  [url-cookie "visitorId" "QWFSkznYORZL7xJ5pu9N" "Sat Jun 14 20:18:03 2087 GMT" "/" "linkinghub.elsevier.com" nil])
+ (".sciencedirect.com"
+  [url-cookie "id_ab" "C:5" "Fri, 27 May 2039 17:03:55 GMT" "/" ".sciencedirect.com" nil]
+  [url-cookie "EUID" "0edffb13-fe73-4517-a1de-3b6d02821269" "Fri, 27 May 2039 17:03:53 GMT" "/" ".sciencedirect.com" nil])
+ (".sagepub.com"
+  [url-cookie "__cfduid" "deb418353368930cbfeb28ac698a01da71559221437" "Fri, 29-May-20 13:03:57 GMT" "/" ".sagepub.com" nil])
+ (".cambridge.org"
+  [url-cookie "__cfduid" "db8fed2c3a51fc9bc4029885b248bac7c1559221715" "Fri, 29-May-20 13:08:35 GMT" "/" ".cambridge.org" nil])
+ (".nih.gov"
+  [url-cookie "ncbi_sid" "CE8933F6CEC16F81_0535SID" "Wed, 27 May 2020 16:57:28 GMT" "/" ".nih.gov" nil]))
 )
 (setq url-cookie-secure-storage
- '((".sciencedirect.com"
-  [url-cookie "__cfduid" "dc2920a4e465261a303ba770dc55e8d121558976633" "Tue, 26-May-20 17:03:53 GMT" "/" ".sciencedirect.com" t])
- ("www.jstor.org"
-  [url-cookie "csrftoken" "p3T9fYFoDvsA3vLrnFxlT2Xpa5M0tVioCpZ84bUTejPp4ov8qLclXbdzN6xuuI0e" "Mon May 25 17:16:00 2020 GMT" "/" "www.jstor.org" t]))
+ '(("www.jstor.org"
+  [url-cookie "csrftoken" "p3T9fYFoDvsA3vLrnFxlT2Xpa5M0tVioCpZ84bUTejPp4ov8qLclXbdzN6xuuI0e" "Mon May 25 17:16:00 2020 GMT" "/" "www.jstor.org" t])
+ (".journals.sagepub.com"
+  [url-cookie "MAID" "qNpCnwySUuyx5OdCfaIgfw==" "Wed, 25-Mar-2020 13:03:58 GMT" "/" ".journals.sagepub.com" t]
+  [url-cookie "MACHINE_LAST_SEEN" "2019-05-30T06%3A03%3A57.787-07%3A00" "Wed, 25-Mar-2020 13:03:58 GMT" "/" ".journals.sagepub.com" t])
+ (".sciencedirect.com"
+  [url-cookie "__cfduid" "dc2920a4e465261a303ba770dc55e8d121558976633" "Tue, 26-May-20 17:03:53 GMT" "/" ".sciencedirect.com" t]))
 )
 
 ;; Local Variables:

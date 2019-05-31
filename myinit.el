@@ -1,0 +1,279 @@
+(setq default-directory "~/")
+(setq inhibit-startup-message t)
+(tool-bar-mode -1)
+
+(fset 'yes-or-no-p 'y-or-n-p)
+(global-set-key (kbd "<f5>") 'revert-buffer)
+
+;; Create auto-save folder, in case it doesn't exist. See
+;; https://www.reddit.com/r/emacs/comments/4rjov0/how_to_create_directory_if_not_exists/
+;; See expression below
+(let ((auto-save-dir (concat user-emacs-directory "auto-save/")))
+  (make-directory auto-save-dir :parents))
+
+;; Save all Emacs temporary files in the auto-save folder
+;; in the emacs directory instead than in the scripts folder
+(setq backup-directory-alis
+      `(("." . ,(concat user-emacs-directory "auto-save/"))))
+
+
+;; Package to try packages for only that session
+(use-package try
+  :ensure t)
+
+(use-package which-key
+  :ensure t
+  :config (which-key-mode))
+
+;; Start emacs with a full screen
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; Enable ido package to make auto-completion
+;; better for completing commands in mini-buffer
+(setq indo-enable-flex-matching t)
+(setq indo-everywhere t)
+(setq ido-create-new-buffer 'always)
+(ido-mode 1)
+
+;; Org-mode
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+
+(defalias 'list-buffers 'ibuffer)
+
+;;------------------------------------------------------------------------------
+;; `org-ref':
+;;------------------------------------------------------------------------------
+(use-package org-ref
+  :ensure t
+  :config
+  (setq reftex-default-bibliography '("~/Google Drive/literature/references.bib")
+	
+	org-ref-bibliography-notes "~/Google Drive/literature/notes.org"
+        org-ref-default-bibliography  '("~/Google Drive/literature/references.bib")
+        org-ref-pdf-directory "~/Google Drive/literature/pdfs/"))
+
+
+;; Package to place numbers on the windows to switch
+;; quicker
+(use-package ace-window
+  :ensure t
+  :init
+  (progn
+    (global-set-key [remap other-window] 'ace-window)
+    (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit- ace-jump-face-foreground :height 3.0)))))
+    ))
+
+;; Package for searching stuff through emacs (swiper)
+
+;; counsel is used by swiper so install before
+(use-package counsel
+  :ensure t
+  )
+
+(use-package swiper
+  :ensure t
+  :config
+  (progn
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq enable-recursive-minibuffers t)
+    ;; enable this if you want `swiper' to use it
+    ;; (setq search-default-mode #'char-fold-to-regexp)
+    (global-set-key "\C-s" 'swiper)
+    (global-set-key (kbd "C-c C-r") 'ivy-resume)
+    (global-set-key (kbd "<f6>") 'ivy-resume)
+    (global-set-key (kbd "M-x") 'counsel-M-x)
+    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+    (global-set-key (kbd "<f1> l") 'counsel-find-library)
+    (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+    (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+    (global-set-key (kbd "C-c g") 'counsel-git)
+    (global-set-key (kbd "C-c j") 'counsel-git-grep)
+    (global-set-key (kbd "C-c k") 'counsel-ag)
+    (global-set-key (kbd "C-x l") 'counsel-locate)
+    (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+    (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+    ))
+
+;; Set spacemacs theme
+;; This is a bit weird because the package is actually 'spacemacs-theme'
+;; but I can't find it on MELPA through emacs (although it is on melpa.org)
+;; However, this ewal-spacemacs-themes seems to work
+;; (use-package ewal-spacemacs-themes
+;;   :ensure t
+;;   :config (load-theme 'spacemacs-dark t))
+
+(use-package moe-theme
+  :ensure t
+  :config
+  (setq moe-theme-highlight-buffer-id t)
+  (moe-dark))
+
+(set-face-attribute 'default nil :font "Monaco-13")
+
+
+;; Install smartparens for adding parens when typing
+(use-package smartparens
+  :ensure t
+  :config (smartparens-global-mode t))
+
+;; Show line numbering on all buffers
+;; Ideally, I'd like only line numbering
+;; on the left buffers but I don't know
+;; how to do it.
+(global-display-line-numbers-mode 1)
+
+;; Load ESS
+(use-package ess
+  :ensure t
+  :init (require 'ess-site))
+
+
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)
+    ))
+
+;; To allow for TAB completion
+;; https://stackoverflow.com/questions/49232454/emacs-ess-how-to-auto-complete-library-function
+(use-package company
+  :ensure t
+  :init (require 'company))
+
+(setq tab-always-indent 'complete)
+
+(setq company-idle-delay 0.5
+      company-show-numbers t
+      company-minimum-prefix-length 2
+      company-tooltip-flip-when-above t)
+
+(global-set-key (kbd "C-M-/") #'company-complete)
+(global-company-mode)
+
+;;; ESS
+(defun my-ess-hook ()
+  ;; ensure company-R-library is in ESS backends
+  (make-local-variable 'company-backends)
+  (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
+  (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
+        company-backends))
+
+(add-hook 'ess-mode-hook 'my-ess-hook)
+
+(with-eval-after-load 'ess
+  (setq ess-use-company t))
+
+;; Taken from https://github.com/karawoo/prelude/blob/db60a8e448757b1e07b7323e411c3d5d4d1b7d45/personal/custom.el
+;; %>% shortcut
+;; http://emacs.stackexchange.com/a/8055/7060
+(defun then_R_operator ()
+  "R - %>% operator or 'then' pipe operator"
+  (interactive)
+  (just-one-space 1)
+  (insert "%>%")
+  (reindent-then-newline-and-indent))
+(define-key ess-mode-map (kbd "C->") 'then_R_operator)
+(define-key inferior-ess-mode-map (kbd "C->") 'then_R_operator)
+
+
+(defun assign_R_operator ()
+  "R - Insert <- operator"
+  (interactive)
+  (insert " <- "))
+(define-key ess-mode-map (kbd "C-<") 'assign_R_operator)
+(define-key inferior-ess-mode-map (kbd "C-<") 'assign_R_operator)
+
+;; Don't restore history or save on exit
+(setq-default inferior-R-args "--no-restore-history --no-save")
+
+;; To highlight complementary parenthesis when cursor is on top
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
+
+;; Smartparens in R repl
+(add-hook 'ess-R-post-run-hook (lambda () (smartparens-mode 1)))
+(add-hook 'inferior-ess-mode-hook (lambda () (smartparens-mode 1)))
+
+
+;; Make Shift-Enter do a lot in ESS
+(setq ess-ask-for-ess-directory nil)
+(add-hook 'inferior-ess-mode-hook
+    '(lambda nil
+          (define-key inferior-ess-mode-map [\C-up]
+              'comint-previous-matching-input-from-input)
+          (define-key inferior-ess-mode-map [\C-down]
+              'comint-next-matching-input-from-input)
+          (define-key inferior-ess-mode-map [\C-x \t]
+              'comint-dynamic-complete-filename)
+     )
+ )
+
+(setq ess-ask-for-ess-directory nil)
+  (setq ess-local-process-name "R")
+  (setq ansi-color-for-comint-mode 'filter)
+  (setq comint-scroll-to-bottom-on-input t)
+  (setq comint-scroll-to-bottom-on-output t)
+  (setq comint-move-point-for-output t)
+
+  (defun my-ess-start-R ()
+    (interactive)
+    (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
+      (progn
+        (delete-other-windows)
+        (setq w1 (selected-window))
+        (setq w1name (buffer-name))
+        (setq w2 (split-window w1 nil t))
+        (R)
+        (set-window-buffer w2 "*R*")
+        (set-window-buffer w1 w1name))))
+
+;; Set the style to RStudio. This gives me stuff like tab spaces are 2 spaces not 4
+(setq ess-default-style 'RStudio)
+
+;; Bring up empty R script and R console for quick calculations
+(defun R-scratch ()
+  (interactive)
+  (progn
+    (delete-other-windows)
+    (setq new-buf (get-buffer-create "scratch.R"))
+    (switch-to-buffer new-buf)
+    (R-mode)
+    (setq w1 (selected-window))
+    (setq w1name (buffer-name))
+    (setq w2 (split-window w1 nil t))
+    (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
+        (R))
+    (set-window-buffer w2 "*R*")
+    (set-window-buffer w1 w1name)))
+
+(global-set-key (kbd "C-x 9") 'R-scratch)
+
+;; Add load Shiny shortcut
+(defun ess-r-shiny-run-app (&optional arg)
+  "Interface for `shiny::runApp()'.
+   With prefix ARG ask for extra args."
+  (interactive)
+  (inferior-ess-r-force)
+  (ess-eval-linewise
+   "shiny::runApp(\".\")\n" "Running app" arg
+   '("" (read-string "Arguments: " "recompile = TRUE"))))
+
+;; avy for moving quickly through files
+(use-package avy
+  :ensure t
+  :bind ("M-s" . avy-goto-char-2))
+
+;; On startup
+;; Open TODO list
+(find-file "~/Google Drive/gtd/inbox.org")
