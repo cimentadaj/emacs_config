@@ -24,7 +24,8 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
   ;; Ideally, I'd like only line numbering
   ;; on the left buffers but I don't know
   ;; how to do it.
-  (global-display-line-numbers-mode 1)
+  (global-display-line-numbers-mode)
+
 
   ;; To highlight complementary parenthesis when cursor is on top
   (show-paren-mode 1)
