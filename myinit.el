@@ -1,63 +1,63 @@
+;; Sets default directory
 (setq default-directory "~/")
+;; Inhibits the Emacs startup message w/ tutorial, etc..
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 
+;; Whenever emacs asks for yes or no, just y or n
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; Reload buffer without reopening with F5
 (global-set-key (kbd "<f5>") 'revert-buffer)
 
-;; Create auto-save folder, in case it doesn't exist. See
-;; https://www.reddit.com/r/emacs/comments/4rjov0/how_to_create_directory_if_not_exists/
-;; See expression below
+;; Start emacs with full screen
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; Show line numbering on all buffers
+;; Ideally, I'd like only line numbering
+;; on the left buffers but I don't know
+;; how to do it.
+(global-display-line-numbers-mode 1)
+
+;; To highlight complementary parenthesis when cursor is on top
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
+;; On startupm open TODO list
+(find-file "~/Google Drive/gtd/inbox.org")
+
 (let ((auto-save-dir (concat user-emacs-directory "auto-save/")))
   (make-directory auto-save-dir :parents))
 
-;; Save all Emacs temporary files in the auto-save folder
-;; in the emacs directory instead than in the scripts folder
 (setq backup-directory-alis
       `(("." . ,(concat user-emacs-directory "auto-save/"))))
 
-
-;; Package to try packages for only that session
 (use-package try
   :ensure t)
 
-(use-package which-key
-  :ensure t
-  :config (which-key-mode))
-
-;; Start emacs with a full screen
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; Enable ido package to make auto-completion
-;; better for completing commands in mini-buffer
 (setq indo-enable-flex-matching t)
 (setq indo-everywhere t)
 (setq ido-create-new-buffer 'always)
 (ido-mode 1)
 
-;; Org-mode
-(use-package org-bullets
+(use-package which-key
   :ensure t
-  :config
-  (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+  :config (which-key-mode))
+
+(use-package smartparens
+  :ensure t
+  :config (smartparens-global-mode t))
+
+(use-package org-bullets
+	:ensure t
+	:config
+	(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+;;        (add-hook 'text-mode-hook 'flyspell-mode))
+
+
 
 (defalias 'list-buffers 'ibuffer)
 
-;;------------------------------------------------------------------------------
-;; `org-ref':
-;;------------------------------------------------------------------------------
-(use-package org-ref
-  :ensure t
-  :config
-  (setq reftex-default-bibliography '("~/Google Drive/literature/references.bib")
-	
-	org-ref-bibliography-notes "~/Google Drive/literature/notes.org"
-        org-ref-default-bibliography  '("~/Google Drive/literature/references.bib")
-        org-ref-pdf-directory "~/Google Drive/literature/pdfs/"))
-
-
-;; Package to place numbers on the windows to switch
-;; quicker
 (use-package ace-window
   :ensure t
   :init
@@ -68,7 +68,13 @@
        ((t (:inherit- ace-jump-face-foreground :height 3.0)))))
     ))
 
-;; Package for searching stuff through emacs (swiper)
+(use-package org-ref
+  :ensure t
+  :config
+  (setq reftex-default-bibliography '("~/Google Drive/literature/references.bib")
+	org-ref-bibliography-notes "~/Google Drive/literature/notes.org"
+	org-ref-default-bibliography  '("~/Google Drive/literature/references.bib")
+	org-ref-pdf-directory "~/Google Drive/literature/pdfs/"))
 
 ;; counsel is used by swiper so install before
 (use-package counsel
@@ -102,6 +108,11 @@
     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
     ))
 
+;; avy for moving quickly through files
+(use-package avy
+  :ensure t
+  :bind ("M-s" . avy-goto-char-2))
+
 ;; Set spacemacs theme
 ;; This is a bit weird because the package is actually 'spacemacs-theme'
 ;; but I can't find it on MELPA through emacs (although it is on melpa.org)
@@ -118,23 +129,47 @@
 
 (set-face-attribute 'default nil :font "Monaco-13")
 
+;; If you find an error, ag needs to be installed from terminal as well.
+;; homebrew install the_silver_searcher for macs
+;; sudo apt-get install silversearcher-ag from ubuntu
 
-;; Install smartparens for adding parens when typing
-(use-package smartparens
-  :ensure t
-  :config (smartparens-global-mode t))
+  ;; Helm search for projectile. Allows to search for files within a project
+  (use-package helm-projectile
+    :ensure t
+    :config
+    (helm-projectile-on))
+  
+  ;; Needed by helm-projectile for esearch
+  (use-package helm-ag
+    :ensure t)
 
-;; Show line numbering on all buffers
-;; Ideally, I'd like only line numbering
-;; on the left buffers but I don't know
-;; how to do it.
-(global-display-line-numbers-mode 1)
+  (use-package projectile
+    :ensure t
+    :bind ("C-c p" . projectile-command-map)
+    :config
+    (projectile-global-mode)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-switch-project-action 'helm-projectile))
 
-;; Load ESS
+
+    ;; (use-package counsel-projectile
+    ;; :ensure t
+    ;; :config
+    ;; ;; (counsel-projectile-mode))
+
 (use-package ess
   :ensure t
   :init (require 'ess-site))
 
+;; Don't restore history or save on exit
+(setq-default inferior-R-args "--no-restore-history --no-save")
+
+;; Smartparens in R repl.
+(add-hook 'ess-R-post-run-hook (lambda () (smartparens-mode 1)))
+(add-hook 'inferior-ess-mode-hook (lambda () (smartparens-mode 1)))
+
+;; Set the style to RStudio. This gives me stuff like tab spaces are 2 spaces not 4
+(setq ess-default-style 'RStudio)
 
 (use-package auto-complete
   :ensure t
@@ -159,18 +194,14 @@
 
 (global-set-key (kbd "C-M-/") #'company-complete)
 (global-company-mode)
-
-;;; ESS
 (defun my-ess-hook ()
   ;; ensure company-R-library is in ESS backends
   (make-local-variable 'company-backends)
   (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
   (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
-        company-backends))
-
-(add-hook 'ess-mode-hook 'my-ess-hook)
-
-(with-eval-after-load 'ess
+	company-backends))
+	(add-hook 'ess-mode-hook 'my-ess-hook)
+	(with-eval-after-load 'ess
   (setq ess-use-company t))
 
 ;; Taken from https://github.com/karawoo/prelude/blob/db60a8e448757b1e07b7323e411c3d5d4d1b7d45/personal/custom.el
@@ -179,12 +210,9 @@
 (defun then_R_operator ()
   "R - %>% operator or 'then' pipe operator"
   (interactive)
-  (just-one-space 1)
-  (insert "%>%")
-  (reindent-then-newline-and-indent))
+  (insert "%>%"))
 (define-key ess-mode-map (kbd "C->") 'then_R_operator)
 (define-key inferior-ess-mode-map (kbd "C->") 'then_R_operator)
-
 
 (defun assign_R_operator ()
   "R - Insert <- operator"
@@ -193,29 +221,15 @@
 (define-key ess-mode-map (kbd "C-<") 'assign_R_operator)
 (define-key inferior-ess-mode-map (kbd "C-<") 'assign_R_operator)
 
-;; Don't restore history or save on exit
-(setq-default inferior-R-args "--no-restore-history --no-save")
-
-;; To highlight complementary parenthesis when cursor is on top
-(show-paren-mode 1)
-(setq show-paren-delay 0)
-
-
-;; Smartparens in R repl
-(add-hook 'ess-R-post-run-hook (lambda () (smartparens-mode 1)))
-(add-hook 'inferior-ess-mode-hook (lambda () (smartparens-mode 1)))
-
-
-;; Make Shift-Enter do a lot in ESS
 (setq ess-ask-for-ess-directory nil)
 (add-hook 'inferior-ess-mode-hook
     '(lambda nil
-          (define-key inferior-ess-mode-map [\C-up]
-              'comint-previous-matching-input-from-input)
-          (define-key inferior-ess-mode-map [\C-down]
-              'comint-next-matching-input-from-input)
-          (define-key inferior-ess-mode-map [\C-x \t]
-              'comint-dynamic-complete-filename)
+	  (define-key inferior-ess-mode-map [\C-up]
+	      'comint-previous-matching-input-from-input)
+	  (define-key inferior-ess-mode-map [\C-down]
+	      'comint-next-matching-input-from-input)
+	  (define-key inferior-ess-mode-map [\C-x \t]
+	      'comint-dynamic-complete-filename)
      )
  )
 
@@ -230,18 +244,14 @@
     (interactive)
     (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
       (progn
-        (delete-other-windows)
-        (setq w1 (selected-window))
-        (setq w1name (buffer-name))
-        (setq w2 (split-window w1 nil t))
-        (R)
-        (set-window-buffer w2 "*R*")
-        (set-window-buffer w1 w1name))))
+	(delete-other-windows)
+	(setq w1 (selected-window))
+	(setq w1name (buffer-name))
+	(setq w2 (split-window w1 nil t))
+	(R)
+	(set-window-buffer w2 "*R*")
+	(set-window-buffer w1 w1name))))
 
-;; Set the style to RStudio. This gives me stuff like tab spaces are 2 spaces not 4
-(setq ess-default-style 'RStudio)
-
-;; Bring up empty R script and R console for quick calculations
 (defun R-scratch ()
   (interactive)
   (progn
@@ -253,13 +263,12 @@
     (setq w1name (buffer-name))
     (setq w2 (split-window w1 nil t))
     (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
-        (R))
+	(R))
     (set-window-buffer w2 "*R*")
     (set-window-buffer w1 w1name)))
 
 (global-set-key (kbd "C-x 9") 'R-scratch)
 
-;; Add load Shiny shortcut
 (defun ess-r-shiny-run-app (&optional arg)
   "Interface for `shiny::runApp()'.
    With prefix ARG ask for extra args."
@@ -268,12 +277,3 @@
   (ess-eval-linewise
    "shiny::runApp(\".\")\n" "Running app" arg
    '("" (read-string "Arguments: " "recompile = TRUE"))))
-
-;; avy for moving quickly through files
-(use-package avy
-  :ensure t
-  :bind ("M-s" . avy-goto-char-2))
-
-;; On startup
-;; Open TODO list
-(find-file "~/Google Drive/gtd/inbox.org")
