@@ -31,7 +31,7 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
   (setq show-paren-delay 0)
 
   ;; On startupm open TODO list
-  (find-file "~/Google Drive/gtd/inbox.org")
+  (find-file "~/google_drive/gtd/inbox.org")
 #+END_SRC
 
 * Save all temporary files in auto-save
@@ -119,10 +119,10 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
    (use-package org-ref
      :ensure t
      :config
-     (setq reftex-default-bibliography '("~/Google Drive/literature/references.bib")
-	   org-ref-bibliography-notes "~/Google Drive/literature/notes.org"
-	   org-ref-default-bibliography  '("~/Google Drive/literature/references.bib")
-	   org-ref-pdf-directory "~/Google Drive/literature/pdfs/"))
+     (setq reftex-default-bibliography '("~/google_drive/literature/references.bib")
+	   org-ref-bibliography-notes "~/google_drive/literature/notes.org"
+	   org-ref-default-bibliography  '("~/google_drive/literature/references.bib")
+	   org-ref-pdf-directory "~/google_drive/literature/pdfs/"))
  #+END_SRC
 
 * Searching in Emacs
