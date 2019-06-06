@@ -1,0 +1,170 @@
+****************************************************************************************************
+org-mode
+****************************************************************************************************
+
+* C-h t Enter tutorial 
+* C-RET enters a heading or a subheading depending on where you are
+* C-S-RET Enter a TODO task
+* C-c / t to see all TODO tasks
+* S-Tab for opening/closing all tasks
+* C-u C-c # (including the #) to update all task boxes
+* S-UP para asignar
+* M-S-RET para introducir un checkbox
+* C-c C-l to create a link
+* <DEL> to view the markup of the link
+* C-c C-o to click on the link
+
+
+****************************************************************************************************
+ESS
+****************************************************************************************************
+* C-c M-o cleans console
+* Shift-enter to execute R code
+* C-c C-e C-r restarts R
+* C-M-\ to indent region - this doesn't indent as I want it but at least it works
+* C-c C-v and type name of function to show help file
+
+
+****************************************************************************************************
+Helm-projectile
+****************************************************************************************************
+C-c p-p to switch projects
+C-c p-f to navigate files within a project
+C-c p-s-s to search for regex within a project
+
+
+****************************************************************************************************
+EMACS
+****************************************************************************************************
+
+* C-h t enters EMACS tutorial
+* C-v moves half a page down
+* M-v moves half a page up
+* C-l center the screen on where the cursor is
+* C-n next line
+* C-p previous line
+* C-f next character
+* C-b before character
+* M-f next word
+* M-b before word
+
+* C-a beginning of line
+* C-e end of line
+* M-a Beginning of sentence
+* M-e end of sentence
+
+* M-< To go to the beginning of document
+* M-> To go to the end of document
+
+*C-u NUMBER any command to repear N number of times
+
+* M-{ moves to the beginning of the parapgraph
+* M-} moves to the end of the paragraph
+* M-DEL deletes the previous word
+* M-d deletes the forward word
+
+	<DEL>        Delete the character just before the cursor
+	C-d   	     Delete the next character after the cursor
+
+	M-<DEL>      Kill the word immediately before the cursor
+	M-d	     Kill the next word after the cursor
+
+	C-k	     Kill from the cursor position to end of line
+	M-k	     Kill to the end of the current sentence
+
+These last ones are very interesting. C-k, as I already knew, deletes a complete line.
+However, M-k deletes a complete sentence.
+
+- C-w kills some text
+This means that the text is now yanked and can be reinserted with 
+
+* C-x C-c restarts emacs
+* C-x C-; to comment a line and un comment it
+* C-x C-s saves the current buffer
+* C-x s saves all buffers
+
+
+	C-x C-f		Find file
+	C-x C-s		Save file
+	C-x s		Save some buffers
+	C-x C-b		List buffers
+	C-x b		Switch buffer
+	C-x C-c		Quit Emacs
+	C-x 1		Delete all but one window
+	C-x u		Undo
+
+
+M-x replace-string replaces a word by another
+
+
+If you are going to be editing human-language text, such as this file,
+you should probably use Text Mode.
+
+>> Type M-x text-mode <Return>.
+To view documentation on your current major mode, type C-h m.
+
+>> Type M-x auto-fill-mode <Return> now.  Then insert a line of "asdf
+   " over again until you see it divide into two lines.  You must put
+   in spaces between them because Auto Fill breaks lines only at
+   spaces.
+
+
+>> Type C-x f with an argument of 20.  (C-u 2 0 C-x f).  Then type in
+   some text and see Emacs fill lines of 20 characters with it.  Then
+   set the margin back to 70 using C-x f again.
+
+If you make changes in the middle of a paragraph, Auto Fill mode does
+not re-fill it for you.  To re-fill the paragraph, type M-q (META-q)
+with the cursor inside that paragraph.
+
+To search for strings you use:
+* C-s to search below the cursor
+* C-r to search above the cursor
+
+Whenever you're typing, C-s or C-r goes to the next match and DEL goes
+back to the previous match. Type return to end the search
+
+
+>> Now type C-x 2 which splits the screen into two windows.  Both
+   windows display this tutorial.  The editing cursor stays in the top
+   window.
+
+>> Type C-M-v to scroll the bottom window.  (If you do not have a real
+   META key, type <ESC> C-v.)
+
+>> Type C-x o ("o" for "other") to move the cursor to the bottom
+>> window.  Use C-v and M-v in the bottom window to scroll it.  Keep
+>> reading these directions in the top window.
+
+>> Type C-x o again to move the cursor back to the top window.  The
+   cursor in the top window is just where it was before.
+
+* C-x 2 to make a copy of your file in a window below
+* C-x 3 to make a copy of your file in a window next to the file
+
+Finally, you can also make a window next to your main windows but only
+reading a new file without making a copy of the one you have open this:
+* C-x 4 C-f and open the new file
+
+For getting help:
+
+>> Type C-h c A COMMAND
+
+where A COMMAND is any command. It will show you the equivalent
+function name from those shortcut keys. This is useful for a quick
+check of what the command is.
+
+>> Type C-h k A COMMAND This is the same as above, but it opens a new
+window with the documentation of this command
+
+
+>> Type C-h a word where a word is a word to search for in all
+function names. It's like a global search in all function names for
+the word that you're looking for.
+
+Type C-h r for the Emacs manual
+
+* C-x C-e to reload a file. It automatically tries to open the current
+file so just press enter.
+
+* C-x h to select the whole buffer

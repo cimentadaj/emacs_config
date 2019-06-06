@@ -1,0 +1,1 @@
+("~/.emacs.d/" "~/Google Drive/literature/" "~/Downloads/gitrepo/sqpr/")

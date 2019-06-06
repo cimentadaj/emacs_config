@@ -19,7 +19,6 @@
 ;; how to do it.
 (global-display-line-numbers-mode)
 
-
 ;; To highlight complementary parenthesis when cursor is on top
 (show-paren-mode 1)
 (setq show-paren-delay 0)
@@ -50,9 +49,10 @@
   :config (smartparens-global-mode t))
 
 (use-package org-bullets
-  :ensure t
-  :config
-  (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+	:ensure t
+	:config
+	(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+;;        (add-hook 'text-mode-hook 'flyspell-mode))
 
 (defalias 'list-buffers 'ibuffer)
 
@@ -69,6 +69,7 @@
 (use-package org-ref
   :ensure t
   :config
+
   (setq reftex-default-bibliography '("~/google_drive/literature/references.bib")
 	org-ref-bibliography-notes "~/google_drive/literature/notes.org"
 	org-ref-default-bibliography  '("~/google_drive/literature/references.bib")
@@ -127,6 +128,34 @@
 
 (set-face-attribute 'default nil :font "Monaco-13")
 
+;; If you find an error, ag needs to be installed from terminal as well.
+;; homebrew install the_silver_searcher for macs
+;; sudo apt-get install silversearcher-ag from ubuntu
+
+  ;; Helm search for projectile. Allows to search for files within a project
+  (use-package helm-projectile
+    :ensure t
+    :config
+    (helm-projectile-on))
+  
+  ;; Needed by helm-projectile for esearch
+  (use-package helm-ag
+    :ensure t)
+
+  (use-package projectile
+    :ensure t
+    :bind ("C-c p" . projectile-command-map)
+    :config
+    (projectile-global-mode)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-switch-project-action 'helm-projectile))
+
+
+    ;; (use-package counsel-projectile
+    ;; :ensure t
+    ;; :config
+    ;; ;; (counsel-projectile-mode))
+
 (use-package ess
   :ensure t
   :init (require 'ess-site))
@@ -180,9 +209,7 @@
 (defun then_R_operator ()
   "R - %>% operator or 'then' pipe operator"
   (interactive)
-  (just-one-space 1)
-  (insert "%>%")
-  (reindent-then-newline-and-indent))
+  (insert "%>%"))
 (define-key ess-mode-map (kbd "C->") 'then_R_operator)
 (define-key inferior-ess-mode-map (kbd "C->") 'then_R_operator)
 

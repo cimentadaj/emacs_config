@@ -82,11 +82,18 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 #+END_SRC
 
 * org-mode
+** Installs and loads org-mode + adds flyspell for spell-checking
+   - See http://pragmaticemacs.com/emacs/check-and-fix-spelling-as-you-type/ for the spell-checking part. I've removed flyspell because it needs to be installed in the computer
+ #+BEGIN_SRC emacs-lisp
+      (use-package org-bullets
+	:ensure t
+	:config
+	(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+;;        (add-hook 'text-mode-hook 'flyspell-mode))
+ #+END_SRC
+
 #+BEGIN_SRC emacs-lisp
-  (use-package org-bullets
-    :ensure t
-    :config
-    (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+
 #+END_SRC
 
 * List buffers
@@ -164,7 +171,6 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 #+END_SRC
 
 * Emacs theme
-
 ** Spacemacs: used this before, keeping here if want to come back
 
  #+BEGIN_SRC emacs-lisp
@@ -188,6 +194,37 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
     (set-face-attribute 'default nil :font "Monaco-13")
   #+END_SRC
 
+* Projectile
+#+BEGIN_SRC emacs-lisp
+;; If you find an error, ag needs to be installed from terminal as well.
+;; homebrew install the_silver_searcher for macs
+;; sudo apt-get install silversearcher-ag from ubuntu
+
+  ;; Helm search for projectile. Allows to search for files within a project
+  (use-package helm-projectile
+    :ensure t
+    :config
+    (helm-projectile-on))
+  
+  ;; Needed by helm-projectile for esearch
+  (use-package helm-ag
+    :ensure t)
+
+  (use-package projectile
+    :ensure t
+    :bind ("C-c p" . projectile-command-map)
+    :config
+    (projectile-global-mode)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-switch-project-action 'helm-projectile))
+
+
+    ;; (use-package counsel-projectile
+    ;; :ensure t
+    ;; :config
+    ;; ;; (counsel-projectile-mode))
+
+#+END_SRC
 * ESS for statistics
 
 ** Load ESS
@@ -248,17 +285,15 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 
 ** Pipe operator shortcut
 #+BEGIN_SRC emacs-lisp
-	   ;; Taken from https://github.com/karawoo/prelude/blob/db60a8e448757b1e07b7323e411c3d5d4d1b7d45/personal/custom.el
-	   ;; %>% shortcut
-	   ;; http://emacs.stackexchange.com/a/8055/7060
-	   (defun then_R_operator ()
-	     "R - %>% operator or 'then' pipe operator"
-	     (interactive)
-	     (just-one-space 1)
-	     (insert "%>%")
-	     (reindent-then-newline-and-indent))
-	   (define-key ess-mode-map (kbd "C->") 'then_R_operator)
-	   (define-key inferior-ess-mode-map (kbd "C->") 'then_R_operator)
+  ;; Taken from https://github.com/karawoo/prelude/blob/db60a8e448757b1e07b7323e411c3d5d4d1b7d45/personal/custom.el
+  ;; %>% shortcut
+  ;; http://emacs.stackexchange.com/a/8055/7060
+  (defun then_R_operator ()
+    "R - %>% operator or 'then' pipe operator"
+    (interactive)
+    (insert "%>%"))
+  (define-key ess-mode-map (kbd "C->") 'then_R_operator)
+  (define-key inferior-ess-mode-map (kbd "C->") 'then_R_operator)
 #+END_SRC
 
 ** Assign operator shortcut

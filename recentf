@@ -2,8 +2,27 @@
 
 (setq recentf-list
       '(
-        "/home/jorge/google_drive/gtd/inbox.org"
-        "/home/jorge/repositories/sqp_ess_correction_simplified/shiny/sqp_correct/server.R"
+        "/Users/cimentadaj/Google Drive/gtd/inbox.org"
+        "/Users/cimentadaj/Google Drive/literature/notes.org"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/DESCRIPTION"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/tests/testthat/test-estimates.R"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/R/estimates.R"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/R/utils.R"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/tests/testthat/test-sqp_sscore.R"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/.Rprofile"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/R/sqp_construct.R"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/tests/testthat/test-sqp_cmv_cor_cov.R"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/man/sqp_cmv_cov.Rd"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/man/sqp_cmv_cor.Rd"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/R/sqp_cmv_cov.R"
+        "/Users/cimentadaj/Downloads/gitrepo/sqpr/R/sqp_cmv_cor.R"
+        "/Users/cimentadaj/emacs_keys.txt"
+        "/Users/cimentadaj/.emacs.d/myinit.org"
+        "/Users/cimentadaj/.emacs.d/elpa/helm-projectile-20190408.1508/helm-projectile-autoloads.el"
+        "/usr/local/Cellar/emacs-mac/emacs-26.2-z-mac-7.6/share/emacs/26.2/etc/COPYING"
+        "/Users/cimentadaj/.emacs.d/init.el"
+        "/Users/cimentadaj/.emacs.d/elpa/ag-20180225.1040/ag-autoloads.el"
+>>>>>>> e3a3092c2b90cbcc343ad3a218e784207af81394
         ))
 
 (setq recentf-filter-changer-current 'nil)
