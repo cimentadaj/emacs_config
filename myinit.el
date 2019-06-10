@@ -54,6 +54,8 @@
 	(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 ;;        (add-hook 'text-mode-hook 'flyspell-mode))
 
+
+
 (defalias 'list-buffers 'ibuffer)
 
 (use-package ace-window
@@ -69,7 +71,6 @@
 (use-package org-ref
   :ensure t
   :config
-
   (setq reftex-default-bibliography '("~/google_drive/literature/references.bib")
 	org-ref-bibliography-notes "~/google_drive/literature/notes.org"
 	org-ref-default-bibliography  '("~/google_drive/literature/references.bib")
@@ -209,7 +210,7 @@
 (defun then_R_operator ()
   "R - %>% operator or 'then' pipe operator"
   (interactive)
-  (insert "%>%"))
+  (insert " %>% "))
 (define-key ess-mode-map (kbd "C->") 'then_R_operator)
 (define-key inferior-ess-mode-map (kbd "C->") 'then_R_operator)
 

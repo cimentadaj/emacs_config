@@ -10,6 +10,7 @@
 
 ;; ----- ido-work-directory-list -----
 (
+ "/home/jorge/.emacs.d/"
  "/Users/cimentadaj/Downloads/gitrepo/sqpr/R/"
  "/Users/cimentadaj/Downloads/gitrepo/sqp_ess_correction_simplified/shiny/sqp_correct/"
  "/Users/cimentadaj/"
@@ -18,17 +19,17 @@
 
 ;; ----- ido-work-file-list -----
 (
+ "README.org"
  "sqp_cmv_cor.R"
  "server.R"
  "global.R"
  "emacs_keys.txt"
  "init.el"
- "README.org"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/Users/cimentadaj/Downloads/gitrepo/sqpr/R/" (23793 22023 185708 884000) "estimates.R" "sqp_rbind_metrics.R" "sqp_login.R" "catch_errors.R" "sqp_construct.R" "sqp_correlate_covariance.R" "sqp_cmv_cor.R" "sqp_cmv_cov.R" "sqp_sscore.R" ".#estimates.R" "studies.R" "questions.R" "#estimates.R#" "sqpr-package.R" "utils.R" "../" "./")
+ ("/home/jorge/.emacs.d/" (23800 49003 742011 142000) "README.org" "../" "recentf" "emacs_keys.txt" "games/" "projectile-bookmarks.eld" "ac-comphist.dat" "myinit.el" "auto-save-list/" "init.el" "myinit.org" "ido.last~" "auto-save/" ".git/" "elpa/" "projectile.cache" "tutorial/" "./" "ido.last" "recentf~" "url/")
 
  ("/Users/cimentadaj/Downloads/gitrepo/sqp_ess_correction_simplified/shiny/sqp_correct/" (23792 53536 320054 296000) "server.R" "language_country_table.csv" "www/" "global.R" "#global.R#" ".#global.R" "test.R" "ui.R" "rsconnect/" ".Rhistory" "../" "./")
 
@@ -37,6 +38,8 @@
  ("/Users/cimentadaj/Google Drive/literature/" (23791 49664 754768 501000) "org-ref-workflow.org~" "references.bib~" "pdfs/" "org-ref-workflow.org" ".#notes.org" "reading_list.org" "#notes.org#" "notes.org" "references.bib" ".DS_Store" "notes.org~" "../" "./")
 
  ("/Users/cimentadaj/Google Drive/Shiny app CME/2019/" (23789 19077 64368 302000) "2019 05 22 Edunet example SEM in STATA.do" "2018 August from Anna - Summary formulas CME_Edunet_ShinyApp.pdf" "2019 05 24 Example for correction.R~" ".#2019 05 24 Example for correction.R" "Text for Shiny app.docx" "Formulas quality of sum scores (corr and cov).gdoc" "Workplan.gdoc" "2019 05 20 Composite scores quality Pol Trust.xlsx" "Icon" "2019 05 24 Example for correction.R" ".DS_Store" "Adjusted definite paper with the proofs.docx" ".Rhistory" "../" "./")
+
+ ("/Users/cimentadaj/Downloads/gitrepo/sqpr/R/" (23779 3516 627383 159000) "estimates.R" "sqp_rbind_metrics.R" "sqp_login.R" "catch_errors.R" "sqp_construct.R" "sqp_correlate_covariance.R" "sqp_cmv_cor.R" "sqp_cmv_cov.R" "sqp_sscore.R" "studies.R" "questions.R" "sqpr-package.R" "utils.R" "../" "./")
 
  ("/Users/cimentadaj/Downloads/gitrepo/sqpr/" (23780 61853 195835 755000) "wish_list.txt" ".Rproj.user/" "sqpr.Rproj" ".travis.yml" "README.Rmd" ".git/" "sqp-rest.postman_collection.json" ".gitignore" "DESCRIPTION" "appveyor.yml" "README.md" "NAMESPACE" "R/" "tests/" ".Rprofile" ".DS_Store" "codecov.yml" "vignettes/" ".Rbuildignore" ".Rhistory" "man/" "../" "./")
 

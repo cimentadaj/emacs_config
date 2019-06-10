@@ -10,6 +10,7 @@
 
 ;; ----- ido-work-directory-list -----
 (
+ "/home/jorge/.emacs.d/"
  "/Users/cimentadaj/Downloads/gitrepo/sqpr/R/"
  "/Users/cimentadaj/Downloads/gitrepo/sqp_ess_correction_simplified/shiny/sqp_correct/"
  "/Users/cimentadaj/"
@@ -18,16 +19,18 @@
 
 ;; ----- ido-work-file-list -----
 (
+ "README.org"
  "sqp_cmv_cor.R"
  "server.R"
  "global.R"
  "emacs_keys.txt"
  "init.el"
- "README.org"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
+ ("/home/jorge/.emacs.d/" (23800 49003 742011 142000) "README.org" "../" "recentf" "emacs_keys.txt" "games/" "projectile-bookmarks.eld" "ac-comphist.dat" "myinit.el" "auto-save-list/" "init.el" "myinit.org" "ido.last~" "auto-save/" ".git/" "elpa/" "projectile.cache" "tutorial/" "./" "ido.last" "recentf~" "url/")
+
  ("/Users/cimentadaj/Downloads/gitrepo/sqp_ess_correction_simplified/shiny/sqp_correct/" (23792 53536 320054 296000) "server.R" "language_country_table.csv" "www/" "global.R" "#global.R#" ".#global.R" "test.R" "ui.R" "rsconnect/" ".Rhistory" "../" "./")
 
  ("/Users/cimentadaj/Google Drive/gtd/" (23791 64194 155189 135000) "inbox.org~" "gtd.org" "inbox.org" "tickler.org" "someday.org" "../" "./")

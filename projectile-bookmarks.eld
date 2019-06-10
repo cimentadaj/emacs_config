@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/Google Drive/literature/" "~/Downloads/gitrepo/sqpr/")
+("~/.emacs.d/" "~/repositories/essurvey/" "~/repositories/sqp_ess_correction_simplified/")

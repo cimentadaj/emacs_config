@@ -1,0 +1,46 @@
+mount | grep "$HOME/google_drive" >/dev/null || /usr/bin/google-drive-ocamlfuse "$HOME/google_drive"&
+sudo apt-get install silversearcher-ag
+git branch
+gi branch
+git branch
+git status
+git branch
+git status
+git diff
+git status
+git add .
+git commit -m "Fixes .por reading problem to .sav"
+git push -u origin master
+git status
+cd ..
+ls
+CONDUCT.md   LICENSE.md  R           appveyor.yml   cran-comments.md  man     vignettes
+CONDUCT.md: command not found
+CONDUCT.md:: command not found
+git status
+git diff DESCRIPTION 
+git diff man/set_email.Rd 
+git status
+git add .
+git commit -m "Trivial docs commit"
+git push
+git status
+git checkout master
+git status
+git branch
+git merge master sddf
+git status
+git push
+05N8lONI
+git push
+git status
+git branch
+cd ..
+git branch
+git branch -d sddf
+git status
+mount | grep "$HOME/google_drive" >/dev/null || /usr/bin/google-drive-ocamlfuse "$HOME/google_drive"&
+[grep] 31972
+[grep]: command not found
+mount | grep "$HOME/google_drive" >/dev/null || /usr/bin/google-drive-ocamlfuse "$HOME/google_drive"&
+mount | grep "$HOME/google_drive" >/dev/null || /usr/bin/google-drive-ocamlfuse "$HOME/google_drive"&

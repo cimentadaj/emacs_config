@@ -133,6 +133,9 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
     :ensure t
     )
 
+
+  (package-install swiper)
+
   (use-package swiper
     :ensure t
     :config
