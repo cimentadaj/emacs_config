@@ -1,1 +1,0 @@
-("~/.emacs.d/" "~/repositories/essurvey/" "~/repositories/sqp_ess_correction_simplified/")
