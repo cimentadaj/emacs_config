@@ -13,7 +13,7 @@ org-mode
 * C-c C-l to create a link
 * <DEL> to view the markup of the link
 * C-c C-o to click on the link
-
+* <s then TAB, to create a code block
 
 ****************************************************************************************************
 ESS

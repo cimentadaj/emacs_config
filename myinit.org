@@ -29,26 +29,26 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
   ;; To highlight complementary parenthesis when cursor is on top
   (show-paren-mode 1)
   (setq show-paren-delay 0)
+  (setq org-src-tab-acts-natively t)
 
-  ;; On startupm open TODO list
+  ;; Set lines to continue if they're too long instead of
+  ;; continuing them in the next line
+  (setq toggle-truncate-lines t)
+
+  ;; On startup open TODO list
   (find-file "~/google_drive/gtd/inbox.org")
 #+END_SRC
 
 * Save all temporary files in auto-save
+** Saves backup and auto-save in temporary directory
 
-** Create auto-save folder, in case it doesn't exist. See https://www.reddit.com/r/emacs/comments/4rjov0/how_to_create_directory_if_not_exists/
-
- #+BEGIN_SRC emacs-lisp
-   (let ((auto-save-dir (concat user-emacs-directory "auto-save/")))
-     (make-directory auto-save-dir :parents))
- #+END_SRC
-
-** Save all Emacs temporary files in the auto-save folder in the emacs directory instead than in the scripts folder
-
- #+BEGIN_SRC emacs-lisp
-   (setq backup-directory-alis
-	 `(("." . ,(concat user-emacs-directory "auto-save/"))))
- #+END_SRC
+#+BEGIN_SRC emacs-lisp
+;; store all backup and autosave files in the tmp dir
+  (setq backup-directory-alist
+	`((".*" . ,temporary-file-directory)))
+  (setq auto-save-file-name-transforms
+	`((".*" ,temporary-file-directory t)))
+#+END_SRC
 
 * Install try
 ** Package to try packages for only that session
@@ -125,6 +125,15 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 	   org-ref-pdf-directory "~/google_drive/literature/pdfs/"))
  #+END_SRC
 
+* YAML mode
+#+BEGIN_SRC emacs-lisp
+
+(use-package yaml-mode
+  :ensure t)
+
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+#+END_SRC
 * Searching in Emacs
 ** swiper
 #+BEGIN_SRC emacs-lisp

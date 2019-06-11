@@ -23,14 +23,16 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
-;; On startupm open TODO list
+(setq org-src-tab-acts-natively t)
+
+;; On startup open TODO list
 (find-file "~/google_drive/gtd/inbox.org")
 
-(let ((auto-save-dir (concat user-emacs-directory "auto-save/")))
-  (make-directory auto-save-dir :parents))
-
-(setq backup-directory-alis
-      `(("." . ,(concat user-emacs-directory "auto-save/"))))
+;; store all backup and autosave files in the tmp dir
+  (setq backup-directory-alist
+	`((".*" . ,temporary-file-directory)))
+  (setq auto-save-file-name-transforms
+	`((".*" ,temporary-file-directory t)))
 
 (use-package try
   :ensure t)
@@ -75,6 +77,11 @@
 	org-ref-bibliography-notes "~/google_drive/literature/notes.org"
 	org-ref-default-bibliography  '("~/google_drive/literature/references.bib")
 	org-ref-pdf-directory "~/google_drive/literature/pdfs/"))
+
+(use-package yaml-mode
+  :ensure t)
+
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 ;; counsel is used by swiper so install before
 (use-package counsel

@@ -29,6 +29,8 @@
 
 ;; ----- ido-dir-file-cache -----
 (
+ ("/home/jorge/repositories/cimentadaj/R/" (23806 12226 750546 723000) "../" "models.R" "timer.R" ".DS_Store" ".#check_covr_adapted.R" "gen_rscript.R" "pisa_countrynames.R" "robust_se.R" "check_covr_adapted.R" ".Rhistory" "check_covr_adapted.R~" "reverse_name.R" "describe.R" "./" "my_new_post.R" "stargazer2.R" "#check_covr_adapted.R#")
+
  ("/home/jorge/.emacs.d/" (23800 49003 742011 142000) "README.org" "../" "recentf" "emacs_keys.txt" "games/" "projectile-bookmarks.eld" "ac-comphist.dat" "myinit.el" "auto-save-list/" "init.el" "myinit.org" "ido.last~" "auto-save/" ".git/" "elpa/" "projectile.cache" "tutorial/" "./" "ido.last" "recentf~" "url/")
 
  ("/Users/cimentadaj/Downloads/gitrepo/sqp_ess_correction_simplified/shiny/sqp_correct/" (23792 53536 320054 296000) "server.R" "language_country_table.csv" "www/" "global.R" "#global.R#" ".#global.R" "test.R" "ui.R" "rsconnect/" ".Rhistory" "../" "./")

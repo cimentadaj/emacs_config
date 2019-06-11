@@ -20,7 +20,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm-ag helm-projectile ag counsel-projectile projectile which-key use-package try smartparens org-ref org-bullets moe-theme ewal-spacemacs-themes ewal-spacemacs-theme ess dracula-theme counsel company auto-complete ace-window))))
+    (yaml-mode helm-ag helm-projectile ag counsel-projectile projectile which-key use-package try smartparens org-ref org-bullets moe-theme ewal-spacemacs-themes ewal-spacemacs-theme ess dracula-theme counsel company auto-complete ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
