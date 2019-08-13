@@ -1,0 +1,128 @@
+git status
+git branch
+git push
+git checkout --orphan gh-pages     git rm -rf .     git commit --allow-empty -m 'Initial gh-pages commit'     git push origin gh-pages     git checkout master
+git status
+git push
+git status
+git branch
+git checkout --orphan gh-pages
+git status
+git status
+git add .
+git commit -m "Trivial commit"
+git push
+cd ../essurvey
+git status
+git status
+git status
+git branch -d gh-pages
+git status
+git checkout --orphan gh-pages     git rm -rf .     git commit --allow-empty -m 'Initial gh-pages commit'     git push origin gh-pages     git checkout master
+clear
+git status
+git add .
+git commit -m "Trivial commit"
+git push
+cd ..
+git status
+git add .
+git commit -m "Travis to fix travis"
+git push
+git branch
+     git checkout --orphan gh-pages     git rm -rf .     git commit --allow-empty -m 'Initial gh-pages commit'     git push origin gh-pages     git checkout master
+git status
+git status
+git status
+git add .
+git commit -m "Trivial commit"
+git status
+git add .
+git commit -m "Tries to fix travis"
+git push
+git status
+cd../..
+ls
+cd ../..
+ls
+git status
+git add .
+git commit -m "Fixes tests on broken barcelona link"
+git push
+git branch
+git status
+git add .
+git commit -m "Adds website deploy in travis"
+git push
+git status
+git add . README.*
+git status
+git status
+git reset HEAD docs/
+git status
+git checkout -- docs/pkgdown.yml
+git status
+git add .
+git commit -m "Fix Bcn brokne link README"
+git push
+git status
+git add .
+git commit -m "Adds list of countries + 	save sample size"
+git push
+cd ~/repositories/opendataes/
+git status
+git status
+git add .
+git commit -m "Excludes all sb-groups if one has diff sign deletion"
+git push
+ssh-keygen -t rsa -b 4096 -C "cimentadaj@gmail.com" -f github_deploy_key -N ''
+rm github_deploy_key.pub
+git status
+gem install travis
+sudo apt install travis
+clear
+travis login
+clear
+ls
+rm github_deploy_key 
+git status
+cat input.txt 
+rm input.txt 
+ls
+git status
+rm travis.log 
+ls
+git status
+clear
+cd ../opendataes/
+clear
+curl -u "cimentadaj" https://api.github.com
+cd ../../repositories/opendataes/
+git status
+cd ../../repositories/
+ls
+git clone https://github.com/cimentadaj/statistical-rethinking-solutions.git
+cd statistical-rethinking-solutions/
+ls
+cd ..
+git status
+git add .
+git commit -m "In the middle of 	homework ch4"
+git status
+git add .
+git commit -m "Finishes hw ch4"
+git status
+git status
+git add notes.R 
+git add .
+git status
+git commit -m "Finishes ch5 -- only ex left + add brms code + prior_simulation code"
+git push
+git status
+git add .
+git commit -m "Finishes ch5 hw"
+cd /tmp/
+ls
+mkdir z
+ls
+git remote add origin https://github.com/cimentadaj/z.gitgit push -u origin master

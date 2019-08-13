@@ -22,8 +22,11 @@
 ;; To highlight complementary parenthesis when cursor is on top
 (show-paren-mode 1)
 (setq show-paren-delay 0)
-
 (setq org-src-tab-acts-natively t)
+
+;; Set lines to continue if they're too long instead of
+;; continuing them in the next line
+(setq toggle-truncate-lines t)
 
 ;; On startup open TODO list
 (find-file "~/google_drive/gtd/inbox.org")
@@ -50,13 +53,25 @@
   :ensure t
   :config (smartparens-global-mode t))
 
+(use-package fill-column-indicator
+  :ensure t
+  :config
+  (setq fci-rule-column 80)
+  (add-hook 'prog-mode-hook 'fci-mode))
+ (defconst fci-padding-display
+   '((when (not (fci-competing-overlay-p buffer-position))
+    . (space :align-to fci-column))
+    (space :width 0)))
+
 (use-package org-bullets
 	:ensure t
 	:config
 	(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 ;;        (add-hook 'text-mode-hook 'flyspell-mode))
 
-
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)))
 
 (defalias 'list-buffers 'ibuffer)
 
@@ -128,13 +143,38 @@
 ;;   :ensure t
 ;;   :config (load-theme 'spacemacs-dark t))
 
-(use-package moe-theme
-  :ensure t
-  :config
-  (setq moe-theme-highlight-buffer-id t)
-  (moe-dark))
+;; (use-package moe-theme
+;;   :ensure t
+;;   :config
+;;   (setq moe-theme-highlight-buffer-id t)
+;;   (moe-dark))
 
-(set-face-attribute 'default nil :font "Monaco-13")
+;; (set-face-attribute 'default nil :font "Monaco-13")
+
+(use-package doom-themes
+  :ensure t)
+
+
+
+;; Global settings (defaults)
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
+;; may have their own settings.
+(load-theme 'doom-one t)
+
+;; Enable flashing mode-line on errors
+(doom-themes-visual-bell-config)
+
+;; Enable custom neotree theme (all-the-icons must be installed!)
+(doom-themes-neotree-config)
+;; or for treemacs users
+(setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+(doom-themes-treemacs-config)
+
+;; Corrects (and improves) org-mode's native fontification.
+(doom-themes-org-config)
 
 ;; If you find an error, ag needs to be installed from terminal as well.
 ;; homebrew install the_silver_searcher for macs
@@ -168,9 +208,27 @@
   :ensure t
   :init (require 'ess-site))
 
+(use-package poly-R
+  :ensure t)
+
+(use-package poly-markdown
+  :ensure t)
+
+;;; R modes
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+(add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown+r-mode))
+
 ;; Don't restore history or save on exit
 (setq-default inferior-R-args "--no-restore-history --no-save")
 
+(setq ess-ask-for-ess-directory nil)
+
+;; ESS doesn't slow down Emacs
+;; (setq ess-eval-visibly 'nowait) ;; in 12.09-1
+(setq ess-eval-visibly nil)
 ;; Smartparens in R repl.
 (add-hook 'ess-R-post-run-hook (lambda () (smartparens-mode 1)))
 (add-hook 'inferior-ess-mode-hook (lambda () (smartparens-mode 1)))
@@ -178,38 +236,70 @@
 ;; Set the style to RStudio. This gives me stuff like tab spaces are 2 spaces not 4
 (setq ess-default-style 'RStudio)
 
-(use-package auto-complete
-  :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
+;; Doesn't work until now. I think the variable display-buffer-alist
+  (setq display-buffer-alist
+	'(("*R*"
+	   nil
+	   (dedicated . t))))
 
-;; To allow for TAB completion
-;; https://stackoverflow.com/questions/49232454/emacs-ess-how-to-auto-complete-library-function
+; Set up company, i.e. code autocomplete
 (use-package company
   :ensure t
-  :init (require 'company))
+  :config
+  ;; Enable company mode everywhere
+  (add-hook 'after-init-hook 'global-company-mode)
+  ;; Set up TAB to manually trigger autocomplete menu
+  (define-key company-mode-map (kbd "TAB") 'company-complete)
+  (define-key company-active-map (kbd "TAB") 'company-complete-common)
+  ;; Set up M-h to see the documentation for items on the autocomplete menu
+  (define-key company-active-map (kbd "M-h") 'company-show-doc-buffer))
 
-(setq tab-always-indent 'complete)
 
-(setq company-idle-delay 0.5
-      company-show-numbers t
-      company-minimum-prefix-length 2
-      company-tooltip-flip-when-above t)
+  ;; ; Set up company, i.e. code autocomplete
+  ;; (use-package company
+  ;;   :ensure t
+  ;;   :config
+  ;;   ;; Enable company mode everywhere
+  ;;   (add-hook 'after-init-hook 'global-company-mode)
+  ;;   ;; Set up TAB to manually trigger autocomplete menu
+  ;;   (define-key company-mode-map (kbd "TAB") 'company-complete)
+  ;;   (define-key company-active-map (kbd "TAB") 'company-complete-common)
+  ;;   ;; Set up M-h to see the documentation for items on the autocomplete menu
+  ;;   (define-key company-active-map (kbd "M-h") 'company-show-doc-buffer))
 
-(global-set-key (kbd "C-M-/") #'company-complete)
-(global-company-mode)
-(defun my-ess-hook ()
-  ;; ensure company-R-library is in ESS backends
-  (make-local-variable 'company-backends)
-  (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
-  (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
-	company-backends))
-	(add-hook 'ess-mode-hook 'my-ess-hook)
-	(with-eval-after-load 'ess
-  (setq ess-use-company t))
+
+  ;;   (use-package auto-complete
+  ;;     :ensure t
+  ;;     :init
+  ;;     (progn
+  ;;       (ac-config-default)
+  ;;       (global-auto-complete-mode t)
+  ;;       ))
+
+  ;;   ;; To allow for TAB completion
+  ;;   ;; https://stackoverflow.com/questions/49232454/emacs-ess-how-to-auto-complete-library-function
+  ;;   (use-package company
+  ;;     :ensure t
+  ;;     :init (require 'company))
+
+  ;;   (setq tab-always-indent 'complete)
+
+  ;;   (setq company-idle-delay 0.5
+  ;; 	company-show-numbers t
+  ;; 	company-minimum-prefix-length 2
+  ;; 	company-tooltip-flip-when-above t)
+
+  ;;   (global-set-key (kbd "C-M-/") #'company-complete)
+  ;;   (global-company-mode)
+  ;;   (defun my-ess-hook ()
+  ;;     ;; ensure company-R-library is in ESS backends
+  ;;     (make-local-variable 'company-backends)
+  ;;     (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
+  ;;     (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
+  ;; 	  company-backends))
+  ;; 	  (add-hook 'ess-mode-hook 'my-ess-hook)
+  ;; 	  (with-eval-after-load 'ess
+  ;;     (setq ess-use-company t))
 
 ;; Taken from https://github.com/karawoo/prelude/blob/db60a8e448757b1e07b7323e411c3d5d4d1b7d45/personal/custom.el
 ;; %>% shortcut
@@ -228,7 +318,6 @@
 (define-key ess-mode-map (kbd "C-<") 'assign_R_operator)
 (define-key inferior-ess-mode-map (kbd "C-<") 'assign_R_operator)
 
-(setq ess-ask-for-ess-directory nil)
 (add-hook 'inferior-ess-mode-hook
     '(lambda nil
 	  (define-key inferior-ess-mode-map [\C-up]
@@ -284,3 +373,62 @@
   (ess-eval-linewise
    "shiny::runApp(\".\")\n" "Running app" arg
    '("" (read-string "Arguments: " "recompile = TRUE"))))
+
+(use-package stan-mode
+     :ensure t
+     :init (require 'stan-mode))
+
+   (use-package stan-snippets
+     :ensure t
+     :init (require 'stan-snippets))
+
+(setq stan-use-auto-complete t)
+
+(use-package magit
+    :ensure t
+    :init
+    (progn
+    (bind-key "C-x g" 'magit-status)
+    (bind-key "<tab>" 'magit-section-toggle)
+    ))
+
+(setq magit-status-margin
+  '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
+    (use-package git-gutter
+    :ensure t
+    :init
+    (global-git-gutter-mode +1))
+
+    (global-set-key (kbd "M-g M-g") 'hydra-git-gutter/body)
+
+
+    (use-package git-timemachine
+    :ensure t
+    )
+  (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1)
+			      :hint nil)
+    "
+  Git gutter:
+    _j_: next hunk        _s_tage hunk     _q_uit
+    _k_: previous hunk    _r_evert hunk    _Q_uit and deactivate git-gutter
+    ^ ^                   _p_opup hunk
+    _h_: first hunk
+    _l_: last hunk        set start _R_evision
+  "
+    ("j" git-gutter:next-hunk)
+    ("k" git-gutter:previous-hunk)
+    ("h" (progn (goto-char (point-min))
+		(git-gutter:next-hunk 1)))
+    ("l" (progn (goto-char (point-min))
+		(git-gutter:previous-hunk 1)))
+    ("s" git-gutter:stage-hunk)
+    ("r" git-gutter:revert-hunk)
+    ("p" git-gutter:popup-hunk)
+    ("R" git-gutter:set-start-revision)
+    ("q" nil :color blue)
+    ("Q" (progn (git-gutter-mode -1)
+		;; git-gutter-fringe doesn't seem to
+		;; clear the markup right away
+		(sit-for 0.1)
+		(git-gutter:clear))
+	 :color blue))

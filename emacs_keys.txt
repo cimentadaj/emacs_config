@@ -14,6 +14,7 @@ org-mode
 * <DEL> to view the markup of the link
 * C-c C-o to click on the link
 * <s then TAB, to create a code block
+* M-x eval region to evaluate an emacs lisp region
 
 ****************************************************************************************************
 ESS
@@ -23,6 +24,17 @@ ESS
 * C-c C-e C-r restarts R
 * C-M-\ to indent region - this doesn't indent as I want it but at least it works
 * C-c C-v and type name of function to show help file
+* M-n-e then choose which format you'd like to export
+* C-c C-s opens a temporary buffer with the search of all packages
+* C-c C-x to see all currently created objects in the session
+* M-r to search through the history with a regex
+* C-c M-l will source the current .R file (only showing the output) but if run from the inferior process, can run any file
+* C-c C-j runs a line and switches to the ESS process
+* C-c M-f runs a function and switches to the ESS process
+* C-c M-r runs a region and switches to the ESS process
+* C-c M-b runs the complete R script and switches to the ESS process
+* C-c C-e C-d to open R function in a new temporary file
+* C-c C-. d change directory
 
 
 ****************************************************************************************************
@@ -31,7 +43,9 @@ Helm-projectile
 C-c p-p to switch projects
 C-c p-f to navigate files within a project
 C-c p-s-s to search for regex within a project
-
+C-c p-r to replace string across a project. y will replace, n will go to next and Y will replace all instances in all buffers
+C-c p-I to open IBuffer on that project
+C-c p-V to list all projects with edited/uncommited files from Git
 
 ****************************************************************************************************
 EMACS
@@ -74,6 +88,8 @@ EMACS
 
 These last ones are very interesting. C-k, as I already knew, deletes a complete line.
 However, M-k deletes a complete sentence.
+
+M-h selected the complete paragraph
 
 - C-w kills some text
 This means that the text is now yanked and can be reinserted with 
