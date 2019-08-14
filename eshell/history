@@ -1,27 +1,3 @@
-git status
-git branch
-git push
-git checkout --orphan gh-pages     git rm -rf .     git commit --allow-empty -m 'Initial gh-pages commit'     git push origin gh-pages     git checkout master
-git status
-git push
-git status
-git branch
-git checkout --orphan gh-pages
-git status
-git status
-git add .
-git commit -m "Trivial commit"
-git push
-cd ../essurvey
-git status
-git status
-git status
-git branch -d gh-pages
-git status
-git checkout --orphan gh-pages     git rm -rf .     git commit --allow-empty -m 'Initial gh-pages commit'     git push origin gh-pages     git checkout master
-clear
-git status
-git add .
 git commit -m "Trivial commit"
 git push
 cd ..
@@ -126,3 +102,27 @@ ls
 mkdir z
 ls
 git remote add origin https://github.com/cimentadaj/z.gitgit push -u origin master
+cd ../../repositories/
+git clone https://github.com/cimentadaj/DDSQLtools.git
+ls
+cd DDSQLtools/
+ls
+cd data/
+ls
+ls
+cd ..
+cd dev
+ls
+git remote -v
+git status
+ls
+ls DATA/
+ls -l DATA/
+ls -lr DATA/
+ls -l -r DATA/
+total 5356
+clear
+ls DATA/
+ls -lDATA/
+ls -l DATA/
+ls -l DATA/RAW/
