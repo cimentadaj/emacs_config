@@ -4,93 +4,99 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 
 * Set default tweaks
 
-#+BEGIN_SRC emacs-lisp
-  ;; Sets default directory
-  (setq default-directory "~/")
-  ;; Inhibits the Emacs startup message w/ tutorial, etc..
-  (setq inhibit-startup-message t)
-  (tool-bar-mode -1)
+  #+BEGIN_SRC emacs-lisp
+    ;; Sets default directory
+    (setq default-directory "~/")
+    ;; Inhibits the Emacs startup message w/ tutorial, etc..
+    (setq inhibit-startup-message t)
+    (tool-bar-mode -1)
 
-  ;; Whenever emacs asks for yes or no, just y or n
-  (fset 'yes-or-no-p 'y-or-n-p)
+    ;; Whenever emacs asks for yes or no, just y or n
+    (fset 'yes-or-no-p 'y-or-n-p)
 
-  ;; Reload buffer without reopening with F5
-  (global-set-key (kbd "<f5>") 'revert-buffer)
+    ;; Reload buffer without reopening with F5
+    (global-set-key (kbd "<f5>") 'revert-buffer)
 
-  ;; Start emacs with full screen
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+    ;; Start emacs with full screen
+    (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-  ;; Show line numbering on all buffers
-  ;; Ideally, I'd like only line numbering
-  ;; on the left buffers but I don't know
-  ;; how to do it.
-  (global-display-line-numbers-mode)
+    ;; Show line numbering on all buffers
+    ;; Ideally, I'd like only line numbering
+    ;; on the left buffers but I don't know
+    ;; how to do it.
+    (global-display-line-numbers-mode)
 
-  ;; To highlight complementary parenthesis when cursor is on top
-  (show-paren-mode 1)
-  (setq show-paren-delay 0)
-  (setq org-src-tab-acts-natively t)
+    ;; To highlight complementary parenthesis when cursor is on top
+    (show-paren-mode 1)
+    (setq show-paren-delay 0)
+    (setq org-src-tab-acts-natively t)
 
-  ;; Set lines to continue if they're too long instead of
-  ;; continuing them in the next line
-  (setq toggle-truncate-lines t)
+    ;; Set lines to continue if they're too long instead of
+    ;; continuing them in the next line
+    (setq-default truncate-lines t)
+    ;; (setq toggle-truncate-lines t)
+    ;; (setq truncate-partial-width-windows nil)
 
-  ;; On startup open TODO list
-  (find-file "~/google_drive/gtd/inbox.org")
-#+END_SRC
+    ;; ;; On startup open TODO list
+    (find-file "~/google_drive/gtd/inbox.org")
+
+    ;; Remaps kill this buffer to familiar CTRL + W
+    (global-set-key [(control w)] 'kill-this-buffer)
+    (global-set-key (kbd "M-k")  'kill-region)
+
+  #+END_SRC
 
 * Save all temporary files in auto-save
 ** Saves backup and auto-save in temporary directory
 
-#+BEGIN_SRC emacs-lisp
-;; store all backup and autosave files in the tmp dir
-  (setq backup-directory-alist
-	`((".*" . ,temporary-file-directory)))
-  (setq auto-save-file-name-transforms
-	`((".*" ,temporary-file-directory t)))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     ;; store all backup and autosave files in the tmp dir
+     (setq backup-directory-alist
+	   `((".*" . ,temporary-file-directory)))
+     (setq auto-save-file-name-transforms
+	   `((".*" ,temporary-file-directory t)))
+   #+END_SRC
 
 * Install try
 ** Package to try packages for only that session
- #+BEGIN_SRC emacs-lisp
-  (use-package try
-    :ensure t)
- #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package try
+       :ensure t)
+   #+END_SRC
 
 * Auto completion 
 ** Enable ido package to make auto-completion better for completing commands in mini-buffer
- #+BEGIN_SRC emacs-lisp
-   (setq indo-enable-flex-matching t)
-   (setq indo-everywhere t)
-   (setq ido-create-new-buffer 'always)
-   (ido-mode 1)
- #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (setq indo-enable-flex-matching t)
+     (setq indo-everywhere t)
+     (setq ido-create-new-buffer 'always)
+     (ido-mode 1)
+   #+END_SRC
 
 ** which-key helps to auto-complete commands in mini-buffer. Type C-c and allow 2 seconds to pass, a pop up menu shows you possible keys
- #+BEGIN_SRC emacs-lisp
-   (use-package which-key
-     :ensure t
-     :config (which-key-mode))
- #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package which-key
+       :ensure t
+       :config (which-key-mode))
+   #+END_SRC
 
 ** smart-parens for completing parenthesis brackets, etc..
-#+BEGIN_SRC emacs-lisp
-  (use-package smartparens
-    :ensure t
-    :config (smartparens-global-mode t))
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package smartparens
+       :ensure t
+       :config (smartparens-global-mode t))
+   #+END_SRC
 
 * Adds 80 character line tweaks
-#+BEGIN_SRC emacs-lisp
-(use-package fill-column-indicator
-  :ensure t
-  :config
-  (setq fci-rule-column 80)
-  (add-hook 'prog-mode-hook 'fci-mode))
- (defconst fci-padding-display
-   '((when (not (fci-competing-overlay-p buffer-position))
-    . (space :align-to fci-column))
-    (space :width 0)))
+  #+BEGIN_SRC emacs-lisp
+
+   (setq-default
+    whitespace-line-column 80
+    whitespace-style       '(face lines-tail))
+
+   (add-hook 'prog-mode-hook #'whitespace-mode)
+
+   (setq-default fill-column 80)
 
 #+END_SRC
 * org-mode
@@ -292,18 +298,22 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 ** Set different modes in ESS
 #+BEGIN_SRC emacs-lisp
 
-(use-package poly-R
-  :ensure t)
+  (use-package poly-R
+    :ensure t)
 
-(use-package poly-markdown
-  :ensure t)
+  (use-package poly-markdown
+    :ensure t)
 
-;;; R modes
-(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
-(add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
-(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-(add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown+r-mode))
+  ;;; R modes
+  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown+r-mode))
+
+  ;; Export files with the same name as the main file
+  ;; Taken from https://github.com/karawoo/prelude/blob/db60a8e448757b1e07b7323e411c3d5d4d1b7d45/personal/custom.el#L751-L752
+  (setq polymode-exporter-output-file-format "%s")
 
 #+END_SRC
 ** Tweaks to ESS config
@@ -335,32 +345,24 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 #+END_SRC
 ** Auto-completion in ESS
 #+BEGIN_SRC emacs-lisp
-
 ; Set up company, i.e. code autocomplete
-(use-package company
-  :ensure t
-  :config
-  ;; Enable company mode everywhere
-  (add-hook 'after-init-hook 'global-company-mode)
+  (use-package company
+    :ensure t
+    :config
+    ;; Enable company mode everywhere
+    (add-hook 'after-init-hook 'global-company-mode))
+
   ;; Set up TAB to manually trigger autocomplete menu
   (define-key company-mode-map (kbd "TAB") 'company-complete)
   (define-key company-active-map (kbd "TAB") 'company-complete-common)
   ;; Set up M-h to see the documentation for items on the autocomplete menu
-  (define-key company-active-map (kbd "M-h") 'company-show-doc-buffer))
+  (define-key company-active-map (kbd "M-h") 'company-show-doc-buffer)
 
-
-  ;; ; Set up company, i.e. code autocomplete
-  ;; (use-package company
+  ;; If you would want to have the help pop ups in company mode
+  ;; (use-package company-quickhelp
   ;;   :ensure t
   ;;   :config
-  ;;   ;; Enable company mode everywhere
-  ;;   (add-hook 'after-init-hook 'global-company-mode)
-  ;;   ;; Set up TAB to manually trigger autocomplete menu
-  ;;   (define-key company-mode-map (kbd "TAB") 'company-complete)
-  ;;   (define-key company-active-map (kbd "TAB") 'company-complete-common)
-  ;;   ;; Set up M-h to see the documentation for items on the autocomplete menu
-  ;;   (define-key company-active-map (kbd "M-h") 'company-show-doc-buffer))
-
+  ;;   (company-quickhelp-mode))
 
   ;;   (use-package auto-complete
   ;;     :ensure t
@@ -440,7 +442,7 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
     (setq comint-scroll-to-bottom-on-output t)
     (setq comint-move-point-for-output t)
 
-    (defun my-ess-start-R ()
+    (defun my-ess--R ()
       (interactive)
       (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
 	(progn
@@ -483,6 +485,17 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
     (ess-eval-linewise
      "shiny::runApp(\".\")\n" "Running app" arg
      '("" (read-string "Arguments: " "recompile = TRUE"))))
+#+END_SRC
+
+** Insert RMarkdown chunk
+#+BEGIN_SRC emacs-lisp
+
+(defun new-chunk (header)
+  "Insert an r-chunk in markdown mode. Necessary due to interactions between polymode and yasnippet"
+  (interactive "sHeader: ")
+  (insert (concat "```{r " header "}\n\n```"))
+  (forward-line -1))
+
 #+END_SRC
 
 * Stan
@@ -557,6 +570,10 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
  #+END_SRC
 
 * Python
+** Set Python interpreter
+#+BEGIN_SRC emacs-lisp
+  (setq python-shell-interpreter "python3")
+ #+END_SRC
 ** Install elpy
 
 #+BEGIN_SRC emacs-lisp
@@ -567,3 +584,59 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
     (elpy-enable))
 
  #+END_SRC
+** Assign operator shortcut
+#+BEGIN_SRC emacs-lisp
+  (defun assign_python_operator ()
+    "Python - Insert = operator"
+    (interactive)
+    (insert " = "))
+  (define-key python-mode-map (kbd "C-<") 'assign_python_operator)
+  (define-key inferior-python-mode-map (kbd "C-<") 'assign_python_operator)
+#+END_SRC
+
+** Scratch script Python
+#+BEGIN_SRC emacs-lisp
+
+  (defun python-scratch ()
+    (interactive)
+    (progn
+      (delete-other-windows)
+      (setq new-buf (get-buffer-create "scratch.py"))
+      (switch-to-buffer new-buf)
+      (python-mode)
+      (setq w1 (selected-window))
+      (setq w1name (buffer-name))
+      (setq w2 (split-window w1 nil t))
+      (if (not (member "*Python*" (mapcar (function buffer-name) (buffer-list))))
+	  (run-python))
+      (set-window-buffer w2 "*Python*")
+      (set-window-buffer w1 w1name)))
+
+  (global-set-key (kbd "C-x 7") 'python-scratch)
+
+#+END_SRC
+* Yasnippet
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :init
+      (yas-global-mode 1))
+#+END_SRC
+* Flycheck
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+
+  '(flycheck-lintr-caching nil) ;; need to customised it inside of Emacs
+  (add-hook 'ess-mode-hook
+	    (lambda () (flycheck-mode t)))
+
+  '(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
+  '(flycheck-idle-change-delay 4) ;; Set delay based on what suits you the best
+
+  ;; In case you want to add flycheck every time you save.
+  ;; (setq flycheck-check-syntax-automatically '(save mode-enable))
+  ;; the default value was '(save idle-change new-line mode-enabled)
+
+#+END_SRC

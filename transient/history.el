@@ -8,4 +8,7 @@
   ("-n256" "--graph" "--color" "--decorate")
   ("-n256" "--graph" "--decorate"))
  (magit-pull nil)
- (magit-push nil))
+ (magit-push nil)
+ (magit-stash nil
+	      ("--all")
+	      ("--include-untracked")))

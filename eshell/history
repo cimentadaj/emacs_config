@@ -1,128 +1,128 @@
-git commit -m "Trivial commit"
-git push
+pip install pandas
+pip install jedi rope flake8 autopep8 yapf black
+python --version
+sudo apt-get install build-essential checkinstall
+sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+cd /usr/srcsudo wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
+sudo tar xzf Python-3.7.4.tgzcd Python-3.7.4
+sudo ./configure --enable-optimizationssudo make altinstall
+python -v
+clear
+python --version
+python3 --version
+python3.7 --version
+pip3 install pandas
+pip install pandas
+pip --version
+pip3.7 install pandas
+pip3.7 --user install pandas
+sudo pip3.7 install pandas
+pip3.7 install pandas
+pip3.7 install --user pandas
+pip3.6 install --user pandas
+ls
+cd ~/
+ls
+cd usr/
+cd /usr/src
+ls
+rm Python-3.7.4.tgz
+sudo rm Python-3.7.4.tgz
+sudo rm Python-3.7.4
+sudo rm -d -f Python-3.7.4
+sudo rm -d -r -f Python-3.7.4
+ls
+python3
+python --version
+python3 --version
+python3.7 --version
+pip3 install pandas
+sudo apt update
+sudo apt install python3.6sudo apt install python3.6-devsudo apt install python3.6-venv
+wget https://bootstrap.pypa.io/get-pip.pysudo python3.6 get-pip.pysudo ln -s /usr/bin/python3.6 /usr/local/bin/python3sudo ln -s /usr/local/bin/pip /usr/local/bin/pip3
+sudo python3.6 get-pip.py
+sudo ln -s /usr/bin/python3.6 /usr/local/bin/python3
+python3 --version
+sudo ln -s /usr/local/bin/pip /usr/local/bin/pip3
+pip3 install pandas
+$(head -1 `which pip` | tail -c +3) --version
+which pip
+which pip -- version
+which pip --version
+sudo ln -s /usr/local/bin/pip /usr/local/bin/pip3
+ln: failed to create symbolic link '/usr/local/bin/pip3': File exists
+sudo ln -s /usr/local/bin/pip3 /usr/local/bin/pip 
+sudo ln -s -f /usr/local/bin/pip /usr/local/bin/pip3
+$(head -1 `which pip` | tail -c +3) --version
+pip3 install pandas
+pip install pandas
+pip install scikit-learn
+pip install jedi rope flake8 autopep8 yapf black
+pip install --user jedi rope flake8 autopep8 yapf black
+cd ../../.emacs.d/
+mkdir snippets
+ls snippets/
+mkdir snippets/python-mode
+cat > flask
+ls
+ls snippets/python-mode/
+ls
+ls snippets/python-mode/
+rm flask
+ls
+cd snippets/python-mode/
+ls
+touch flask
+man cat
+cat flask
+ls
+flask
+cat flask
+ls
+cat flask
+rm flask
+cat flask
+ls
+ls
+cat flask
+cat > flask 
+cat > flas
+cat > flask
+touch flask
+emacs flask
+ls
+ls
+rm flask
+rm flas
+rm flask^Y
+ls
+rm .
+rm -f -d -r .
+rm -f -d -r .
+rm -f -d -r .
+sudo rm -f -d -r .
+ls
+xdg-open .
+ls
+ls
+touch flask
+ls
+cd ~/.emacs.d/
+ls
+cd snippets/
+ls
+mv ess-mode/markdown-mode ../
+ls
+ls ess-mode/
 cd ..
-git status
-git add .
-git commit -m "Travis to fix travis"
-git push
-git branch
-     git checkout --orphan gh-pages     git rm -rf .     git commit --allow-empty -m 'Initial gh-pages commit'     git push origin gh-pages     git checkout master
-git status
-git status
-git status
-git add .
-git commit -m "Trivial commit"
-git status
-git add .
-git commit -m "Tries to fix travis"
-git push
-git status
-cd../..
 ls
-cd ../..
+mv markdown-mode snippets/
 ls
-git status
-git add .
-git commit -m "Fixes tests on broken barcelona link"
-git push
-git branch
-git status
-git add .
-git commit -m "Adds website deploy in travis"
-git push
-git status
-git add . README.*
-git status
-git status
-git reset HEAD docs/
-git status
-git checkout -- docs/pkgdown.yml
-git status
-git add .
-git commit -m "Fix Bcn brokne link README"
-git push
-git status
-git add .
-git commit -m "Adds list of countries + 	save sample size"
-git push
-cd ~/repositories/opendataes/
-git status
-git status
-git add .
-git commit -m "Excludes all sb-groups if one has diff sign deletion"
-git push
-ssh-keygen -t rsa -b 4096 -C "cimentadaj@gmail.com" -f github_deploy_key -N ''
-rm github_deploy_key.pub
-git status
-gem install travis
-sudo apt install travis
 clear
-travis login
-clear
+cd snippets/
 ls
-rm github_deploy_key 
-git status
-cat input.txt 
-rm input.txt 
+mv markdown-mode rmd-yaml
 ls
-git status
-rm travis.log 
+mkdir markdown-mode
+mv rmd-yaml markdown-mode/
 ls
-git status
-clear
-cd ../opendataes/
-clear
-curl -u "cimentadaj" https://api.github.com
-cd ../../repositories/opendataes/
-git status
-cd ../../repositories/
-ls
-git clone https://github.com/cimentadaj/statistical-rethinking-solutions.git
-cd statistical-rethinking-solutions/
-ls
-cd ..
-git status
-git add .
-git commit -m "In the middle of 	homework ch4"
-git status
-git add .
-git commit -m "Finishes hw ch4"
-git status
-git status
-git add notes.R 
-git add .
-git status
-git commit -m "Finishes ch5 -- only ex left + add brms code + prior_simulation code"
-git push
-git status
-git add .
-git commit -m "Finishes ch5 hw"
-cd /tmp/
-ls
-mkdir z
-ls
-git remote add origin https://github.com/cimentadaj/z.gitgit push -u origin master
-cd ../../repositories/
-git clone https://github.com/cimentadaj/DDSQLtools.git
-ls
-cd DDSQLtools/
-ls
-cd data/
-ls
-ls
-cd ..
-cd dev
-ls
-git remote -v
-git status
-ls
-ls DATA/
-ls -l DATA/
-ls -lr DATA/
-ls -l -r DATA/
-total 5356
-clear
-ls DATA/
-ls -lDATA/
-ls -l DATA/
-ls -l DATA/RAW/

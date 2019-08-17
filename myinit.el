@@ -26,16 +26,22 @@
 
 ;; Set lines to continue if they're too long instead of
 ;; continuing them in the next line
-(setq toggle-truncate-lines t)
+(setq-default truncate-lines t)
+;; (setq toggle-truncate-lines t)
+;; (setq truncate-partial-width-windows nil)
 
-;; On startup open TODO list
+;; ;; On startup open TODO list
 (find-file "~/google_drive/gtd/inbox.org")
 
+;; Remaps kill this buffer to familiar CTRL + W
+(global-set-key [(control w)] 'kill-this-buffer)
+(global-set-key (kbd "M-k")  'kill-region)
+
 ;; store all backup and autosave files in the tmp dir
-  (setq backup-directory-alist
-	`((".*" . ,temporary-file-directory)))
-  (setq auto-save-file-name-transforms
-	`((".*" ,temporary-file-directory t)))
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 (use-package try
   :ensure t)
@@ -53,15 +59,13 @@
   :ensure t
   :config (smartparens-global-mode t))
 
-(use-package fill-column-indicator
-  :ensure t
-  :config
-  (setq fci-rule-column 80)
-  (add-hook 'prog-mode-hook 'fci-mode))
- (defconst fci-padding-display
-   '((when (not (fci-competing-overlay-p buffer-position))
-    . (space :align-to fci-column))
-    (space :width 0)))
+(setq-default
+ whitespace-line-column 80
+ whitespace-style       '(face lines-tail))
+
+(add-hook 'prog-mode-hook #'whitespace-mode)
+
+(setq-default fill-column 80)
 
 (use-package org-bullets
 	:ensure t
@@ -221,6 +225,10 @@
 (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 (add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown+r-mode))
 
+;; Export files with the same name as the main file
+;; Taken from https://github.com/karawoo/prelude/blob/db60a8e448757b1e07b7323e411c3d5d4d1b7d45/personal/custom.el#L751-L752
+(setq polymode-exporter-output-file-format "%s")
+
 ;; Don't restore history or save on exit
 (setq-default inferior-R-args "--no-restore-history --no-save")
 
@@ -243,30 +251,23 @@
 	   (dedicated . t))))
 
 ; Set up company, i.e. code autocomplete
-(use-package company
-  :ensure t
-  :config
-  ;; Enable company mode everywhere
-  (add-hook 'after-init-hook 'global-company-mode)
+  (use-package company
+    :ensure t
+    :config
+    ;; Enable company mode everywhere
+    (add-hook 'after-init-hook 'global-company-mode))
+
   ;; Set up TAB to manually trigger autocomplete menu
   (define-key company-mode-map (kbd "TAB") 'company-complete)
   (define-key company-active-map (kbd "TAB") 'company-complete-common)
   ;; Set up M-h to see the documentation for items on the autocomplete menu
-  (define-key company-active-map (kbd "M-h") 'company-show-doc-buffer))
+  (define-key company-active-map (kbd "M-h") 'company-show-doc-buffer)
 
-
-  ;; ; Set up company, i.e. code autocomplete
-  ;; (use-package company
+  ;; If you would want to have the help pop ups in company mode
+  ;; (use-package company-quickhelp
   ;;   :ensure t
   ;;   :config
-  ;;   ;; Enable company mode everywhere
-  ;;   (add-hook 'after-init-hook 'global-company-mode)
-  ;;   ;; Set up TAB to manually trigger autocomplete menu
-  ;;   (define-key company-mode-map (kbd "TAB") 'company-complete)
-  ;;   (define-key company-active-map (kbd "TAB") 'company-complete-common)
-  ;;   ;; Set up M-h to see the documentation for items on the autocomplete menu
-  ;;   (define-key company-active-map (kbd "M-h") 'company-show-doc-buffer))
-
+  ;;   (company-quickhelp-mode))
 
   ;;   (use-package auto-complete
   ;;     :ensure t
@@ -336,7 +337,7 @@
   (setq comint-scroll-to-bottom-on-output t)
   (setq comint-move-point-for-output t)
 
-  (defun my-ess-start-R ()
+  (defun my-ess--R ()
     (interactive)
     (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
       (progn
@@ -373,6 +374,12 @@
   (ess-eval-linewise
    "shiny::runApp(\".\")\n" "Running app" arg
    '("" (read-string "Arguments: " "recompile = TRUE"))))
+
+(defun new-chunk (header)
+  "Insert an r-chunk in markdown mode. Necessary due to interactions between polymode and yasnippet"
+  (interactive "sHeader: ")
+  (insert (concat "```{r " header "}\n\n```"))
+  (forward-line -1))
 
 (use-package stan-mode
      :ensure t
@@ -434,3 +441,54 @@
   ;; 		(sit-for 0.1)
   ;; 		(git-gutter:clear))
   ;; 	 :color blue))
+
+(setq python-shell-interpreter "python3")
+
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+
+(defun assign_python_operator ()
+  "Python - Insert = operator"
+  (interactive)
+  (insert " = "))
+(define-key python-mode-map (kbd "C-<") 'assign_python_operator)
+(define-key inferior-python-mode-map (kbd "C-<") 'assign_python_operator)
+
+(defun python-scratch ()
+  (interactive)
+  (progn
+    (delete-other-windows)
+    (setq new-buf (get-buffer-create "scratch.py"))
+    (switch-to-buffer new-buf)
+    (python-mode)
+    (setq w1 (selected-window))
+    (setq w1name (buffer-name))
+    (setq w2 (split-window w1 nil t))
+    (if (not (member "*Python*" (mapcar (function buffer-name) (buffer-list))))
+	(run-python))
+    (set-window-buffer w2 "*Python*")
+    (set-window-buffer w1 w1name)))
+
+(global-set-key (kbd "C-x 7") 'python-scratch)
+
+(use-package yasnippet
+  :ensure t
+  :init
+    (yas-global-mode 1))
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+'(flycheck-lintr-caching nil) ;; need to customised it inside of Emacs
+(add-hook 'ess-mode-hook
+	  (lambda () (flycheck-mode t)))
+
+'(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
+'(flycheck-idle-change-delay 4) ;; Set delay based on what suits you the best
+
+;; In case you want to add flycheck every time you save.
+;; (setq flycheck-check-syntax-automatically '(save mode-enable))
+;; the default value was '(save idle-change new-line mode-enabled)
