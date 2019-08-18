@@ -345,12 +345,13 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 #+END_SRC
 ** Auto-completion in ESS
 #+BEGIN_SRC emacs-lisp
-; Set up company, i.e. code autocomplete
+  ;; Set up company, i.e. code autocomplete
   (use-package company
     :ensure t
     :config
     ;; Enable company mode everywhere
-    (add-hook 'after-init-hook 'global-company-mode))
+    (add-hook 'after-init-hook 'global-company-mode)
+    )
 
   ;; Set up TAB to manually trigger autocomplete menu
   (define-key company-mode-map (kbd "TAB") 'company-complete)
@@ -572,18 +573,23 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 * Python
 ** Set Python interpreter
 #+BEGIN_SRC emacs-lisp
+
+  ;; You had some problems making sure elpy had autocompletion in both
+  ;; script and inferior python. This was due to elpy have python2.7 in
+  ;; RPC Python in elpy-config (in Emacs) where it should have python3.
+  ;; Both Interactive Python and RPC Python should have python3.
   (setq python-shell-interpreter "python3")
- #+END_SRC
+  (setq elpy-rpc-python-command "python3")
+
+#+END_SRC
 ** Install elpy
-
 #+BEGIN_SRC emacs-lisp
-
   (use-package elpy
     :ensure t
     :init
     (elpy-enable))
-
  #+END_SRC
+
 ** Assign operator shortcut
 #+BEGIN_SRC emacs-lisp
   (defun assign_python_operator ()
@@ -615,6 +621,7 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
   (global-set-key (kbd "C-x 7") 'python-scratch)
 
 #+END_SRC
+
 * Yasnippet
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
@@ -624,6 +631,7 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 #+END_SRC
 * Flycheck
 #+BEGIN_SRC emacs-lisp
+
   (use-package flycheck
     :ensure t
     :init (global-flycheck-mode))

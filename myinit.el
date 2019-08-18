@@ -250,57 +250,58 @@
 	   nil
 	   (dedicated . t))))
 
-; Set up company, i.e. code autocomplete
-  (use-package company
-    :ensure t
-    :config
-    ;; Enable company mode everywhere
-    (add-hook 'after-init-hook 'global-company-mode))
+;; Set up company, i.e. code autocomplete
+(use-package company
+  :ensure t
+  :config
+  ;; Enable company mode everywhere
+  (add-hook 'after-init-hook 'global-company-mode)
+  )
 
-  ;; Set up TAB to manually trigger autocomplete menu
-  (define-key company-mode-map (kbd "TAB") 'company-complete)
-  (define-key company-active-map (kbd "TAB") 'company-complete-common)
-  ;; Set up M-h to see the documentation for items on the autocomplete menu
-  (define-key company-active-map (kbd "M-h") 'company-show-doc-buffer)
+;; Set up TAB to manually trigger autocomplete menu
+(define-key company-mode-map (kbd "TAB") 'company-complete)
+(define-key company-active-map (kbd "TAB") 'company-complete-common)
+;; Set up M-h to see the documentation for items on the autocomplete menu
+(define-key company-active-map (kbd "M-h") 'company-show-doc-buffer)
 
-  ;; If you would want to have the help pop ups in company mode
-  ;; (use-package company-quickhelp
-  ;;   :ensure t
-  ;;   :config
-  ;;   (company-quickhelp-mode))
+;; If you would want to have the help pop ups in company mode
+;; (use-package company-quickhelp
+;;   :ensure t
+;;   :config
+;;   (company-quickhelp-mode))
 
-  ;;   (use-package auto-complete
-  ;;     :ensure t
-  ;;     :init
-  ;;     (progn
-  ;;       (ac-config-default)
-  ;;       (global-auto-complete-mode t)
-  ;;       ))
+;;   (use-package auto-complete
+;;     :ensure t
+;;     :init
+;;     (progn
+;;       (ac-config-default)
+;;       (global-auto-complete-mode t)
+;;       ))
 
-  ;;   ;; To allow for TAB completion
-  ;;   ;; https://stackoverflow.com/questions/49232454/emacs-ess-how-to-auto-complete-library-function
-  ;;   (use-package company
-  ;;     :ensure t
-  ;;     :init (require 'company))
+;;   ;; To allow for TAB completion
+;;   ;; https://stackoverflow.com/questions/49232454/emacs-ess-how-to-auto-complete-library-function
+;;   (use-package company
+;;     :ensure t
+;;     :init (require 'company))
 
-  ;;   (setq tab-always-indent 'complete)
+;;   (setq tab-always-indent 'complete)
 
-  ;;   (setq company-idle-delay 0.5
-  ;; 	company-show-numbers t
-  ;; 	company-minimum-prefix-length 2
-  ;; 	company-tooltip-flip-when-above t)
+;;   (setq company-idle-delay 0.5
+;; 	company-show-numbers t
+;; 	company-minimum-prefix-length 2
+;; 	company-tooltip-flip-when-above t)
 
-  ;;   (global-set-key (kbd "C-M-/") #'company-complete)
-  ;;   (global-company-mode)
-  ;;   (defun my-ess-hook ()
-  ;;     ;; ensure company-R-library is in ESS backends
-  ;;     (make-local-variable 'company-backends)
-  ;;     (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
-  ;;     (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
-  ;; 	  company-backends))
-  ;; 	  (add-hook 'ess-mode-hook 'my-ess-hook)
-  ;; 	  (with-eval-after-load 'ess
-  ;;     (setq ess-use-company t))
+;;   (global-set-key (kbd "C-M-/") #'company-complete)
+;;   (global-company-mode)
+;;   (defun my-ess-hook ()
+;;     ;; ensure company-R-library is in ESS backends
+;;     (make-local-variable 'company-backends)
+;;     (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
+;;     (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
+;; 	  company-backends))
+;; 	  (add-hook 'ess-mode-hook 'my-ess-hook)
+;; 	  (with-eval-after-load 'ess
+;;     (setq ess-use-company t))
 
 ;; Taken from https://github.com/karawoo/prelude/blob/db60a8e448757b1e07b7323e411c3d5d4d1b7d45/personal/custom.el
 ;; %>% shortcut
@@ -445,9 +446,11 @@
 (setq python-shell-interpreter "python3")
 
 (use-package elpy
-  :ensure t
-  :init
-  (elpy-enable))
+    :ensure t
+    :init
+    (elpy-enable))
+
+(setq elpy-rpc-python-command "python3")
 
 (defun assign_python_operator ()
   "Python - Insert = operator"
