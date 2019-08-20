@@ -1,10 +1,3 @@
-ls
-cat flask
-rm flask
-cat flask
-ls
-ls
-cat flask
 cat > flask 
 cat > flas
 cat > flask
@@ -126,3 +119,10 @@ bash public_update.sh
 ls
 rm README.html
 ls
+ls
+mkdir figs
+mv UPF.png figs/upf.png
+ls
+rm styles.css 
+ls
+ls figs

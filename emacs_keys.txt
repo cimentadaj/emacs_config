@@ -184,3 +184,13 @@ Type C-h r for the Emacs manual
 file so just press enter.
 
 * C-x h to select the whole buffer
+
+****************************************************************************************************
+marks, bookmarks and helm
+****************************************************************************************************
+
+* C-spc C-spc marks a region
+* C-u C-spc jumps to last region
+
+* C-x r m bookmark <RET> sets a Bookmark by the name of bookmark
+* helm-bookmarks searchers for any bookmarks
