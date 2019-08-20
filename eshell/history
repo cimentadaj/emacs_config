@@ -1,7 +1,4 @@
 ls
-flask
-cat flask
-ls
 cat flask
 rm flask
 cat flask
@@ -126,3 +123,6 @@ bash public_update.sh
 R
 git status
 bash public_update.sh
+ls
+rm README.html
+ls
