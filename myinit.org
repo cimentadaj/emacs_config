@@ -573,7 +573,6 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 * Python
 ** Set Python interpreter
 #+BEGIN_SRC emacs-lisp
-
   ;; You had some problems making sure elpy had autocompletion in both
   ;; script and inferior python. This was due to elpy have python2.7 in
   ;; RPC Python in elpy-config (in Emacs) where it should have python3.

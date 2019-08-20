@@ -443,14 +443,17 @@
   ;; 		(git-gutter:clear))
   ;; 	 :color blue))
 
+;; You had some problems making sure elpy had autocompletion in both
+;; script and inferior python. This was due to elpy have python2.7 in
+;; RPC Python in elpy-config (in Emacs) where it should have python3.
+;; Both Interactive Python and RPC Python should have python3.
 (setq python-shell-interpreter "python3")
+(setq elpy-rpc-python-command "python3")
 
 (use-package elpy
-    :ensure t
-    :init
-    (elpy-enable))
-
-(setq elpy-rpc-python-command "python3")
+  :ensure t
+  :init
+  (elpy-enable))
 
 (defun assign_python_operator ()
   "Python - Insert = operator"

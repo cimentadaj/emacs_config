@@ -1,39 +1,3 @@
-wget https://bootstrap.pypa.io/get-pip.pysudo python3.6 get-pip.pysudo ln -s /usr/bin/python3.6 /usr/local/bin/python3sudo ln -s /usr/local/bin/pip /usr/local/bin/pip3
-sudo python3.6 get-pip.py
-sudo ln -s /usr/bin/python3.6 /usr/local/bin/python3
-python3 --version
-sudo ln -s /usr/local/bin/pip /usr/local/bin/pip3
-pip3 install pandas
-$(head -1 `which pip` | tail -c +3) --version
-which pip
-which pip -- version
-which pip --version
-sudo ln -s /usr/local/bin/pip /usr/local/bin/pip3
-ln: failed to create symbolic link '/usr/local/bin/pip3': File exists
-sudo ln -s /usr/local/bin/pip3 /usr/local/bin/pip 
-sudo ln -s -f /usr/local/bin/pip /usr/local/bin/pip3
-$(head -1 `which pip` | tail -c +3) --version
-pip3 install pandas
-pip install pandas
-pip install scikit-learn
-pip install jedi rope flake8 autopep8 yapf black
-pip install --user jedi rope flake8 autopep8 yapf black
-cd ../../.emacs.d/
-mkdir snippets
-ls snippets/
-mkdir snippets/python-mode
-cat > flask
-ls
-ls snippets/python-mode/
-ls
-ls snippets/python-mode/
-rm flask
-ls
-cd snippets/python-mode/
-ls
-touch flask
-man cat
-cat flask
 ls
 flask
 cat flask
@@ -126,3 +90,39 @@ pipenv
 which pipenv
 sudo -H pip install -U pipenv
 pipenv shell
+ls
+cd ..
+cd ..
+clear
+ls
+mkdir irene/presupuesto_piraguas
+ls
+mkdir -r irene/presupuesto_piraguas
+mkdir irene
+mkdir irene/presupuesto_piraguas
+mv intro.txt ~/google_drive/berlin_apartment_application/
+cd ../../repositories/cimentadaj.github.io/
+ls
+git status
+ls
+xdg-open .
+R
+R
+R
+R
+R
+clear
+bash public_update.sh
+cd ../../repositories/cimentadaj.github.io/
+ls
+git status
+bash public_update.sh
+R
+git status
+bash public_update.sh
+git status
+git status
+bash public_update.sh
+R
+git status
+bash public_update.sh
