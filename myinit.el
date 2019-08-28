@@ -43,6 +43,8 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+(setq-default auto-save-default t)
+
 (use-package try
   :ensure t)
 
@@ -76,6 +78,17 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((R . t)))
+
+(global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c c") 'org-capture)
+
+(setq org-agenda-files (list "~/google_drive/gtd/inbox.org"))
+
+(defun cj-org-agenda-show-agenda-and-todo (&optional arg)
+  (interactive "P")
+  (org-agenda arg "n"))
+
+(define-key global-map (kbd "C-c a") 'cj-org-agenda-show-agenda-and-todo)
 
 (defalias 'list-buffers 'ibuffer)
 
@@ -498,3 +511,23 @@
 ;; In case you want to add flycheck every time you save.
 ;; (setq flycheck-check-syntax-automatically '(save mode-enable))
 ;; the default value was '(save idle-change new-line mode-enabled)
+
+(use-package expand-region
+  :ensure t
+  :init (global-set-key (kbd "C-=") 'er/expand-region)
+  )
+
+(pending-delete-mode t)
+
+(setq package-check-signature nil)
+
+
+(use-package org-gcal
+  :ensure t
+  :config
+  (setq org-gcal-client-id "672622840611-q5j91p8rojnjf5sghgvems2kjkhslg9v.apps.googleusercontent.com"
+	org-gcal-client-secret "tRXHk5VgQGBIyOMo1wu917pK"
+	org-gcal-file-alist '(("cimentadaj@gmail.com"))))
+
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))

@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("le"
+(("org-refile-last-stored"
+ (filename . "~/google_drive/gtd/inbox.org")
+ (front-context-string . "** TODO My new t")
+ (rear-context-string . "         :work:\n")
+ (position . 35155))
+("le"
  (filename . "~/google_drive/gtd/inbox.org")
  (front-context-string . "\n   - [ ] https:")
  (rear-context-string . "ipt como Rstudio")

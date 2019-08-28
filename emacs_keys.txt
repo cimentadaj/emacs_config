@@ -15,6 +15,12 @@ org-mode
 * C-c C-o to click on the link
 * <s then TAB, to create a code block
 * M-x eval region to evaluate an emacs lisp region
+* To store another file link (or specific place in the article), go to the article and M-x org-store-link, then go to where you want to put the link and press C-c C-l
+* C-c C-n (org-next-visible-heading) Next heading.
+* C-c C-p (org-previous-visible-heading) Previous heading.
+* C-c C-b (org-backward-heading-same-level) Previous heading same level.
+* C-c C-u (outline-up-heading) Backward to higher level heading.
+* ALT- -> or <- to decrease levels
 
 ****************************************************************************************************
 ESS
@@ -185,6 +191,20 @@ file so just press enter.
 
 * C-x h to select the whole buffer
 
+
+
+* C-M-n forward-list Move forward over a parenthetical group
+
+* C-M-p backward-list Move backward over a parenthetical group
+
+* C-M-f forward-sexp Move forward over a balanced expression
+
+* C-M-b backward-sexp Move backward over a balanced expression
+
+* C-M-k kill-sexp Kill balanced expression forward
+
+* C-M-SPC mark-sexp Put the mark at the end of the sexp.
+
 ****************************************************************************************************
 marks, bookmarks and helm
 ****************************************************************************************************
@@ -194,3 +214,4 @@ marks, bookmarks and helm
 
 * C-x r m bookmark <RET> sets a Bookmark by the name of bookmark
 * helm-bookmarks searchers for any bookmarks
+* C-x r b to search for any bookmark

@@ -1,89 +1,3 @@
-cat > flask 
-cat > flas
-cat > flask
-touch flask
-emacs flask
-ls
-ls
-rm flask
-rm flas
-rm flask^Y
-ls
-rm .
-rm -f -d -r .
-rm -f -d -r .
-rm -f -d -r .
-sudo rm -f -d -r .
-ls
-xdg-open .
-ls
-ls
-touch flask
-ls
-cd ~/.emacs.d/
-ls
-cd snippets/
-ls
-mv ess-mode/markdown-mode ../
-ls
-ls ess-mode/
-cd ..
-ls
-mv markdown-mode snippets/
-ls
-clear
-cd snippets/
-ls
-mv markdown-mode rmd-yaml
-ls
-mkdir markdown-mode
-mv rmd-yaml markdown-mode/
-ls
-pip3 install jedi rope flake8 autopep8 yapf black
-pip install jedi rope flake8 yapf importmagic
-pip install ipython
-pip install --user ipython
-ipython
-ipython3
-ipy
-ip
-man echo
-ipython
-pip3 install ipython
-pip install ipython
-python --version
-python3
-sudo apt-get install python3.6
-pip --version
-pip3 --version
-pip install --user pipenv
-ls
-cd ..
-ls
-cd test/
-ls
-rm -r -f R
-ls
-rm mtcars.csv 
-ls
-pipenv install requests
-cd ../test/
-ls
-pipenv install requests
-which pipenv
-python -m site --user-base
-pip install pipenv
-pipenv shell
-sudo pip install pipenv
-sudo pip install --user pipenv
-pipenv
-which pipenv
-sudo -H pip install -U pipenv
-pipenv shell
-ls
-cd ..
-cd ..
-clear
 ls
 mkdir irene/presupuesto_piraguas
 ls
@@ -126,3 +40,89 @@ ls
 rm styles.css 
 ls
 ls figs
+ls
+rm test.R 
+cd ..
+ls
+git status
+git branch
+git remote -v
+cd ../essurvey_briatte/
+ls
+git remote add upstream https://github.com/ropensci/essurvey.git
+git fetch upstream
+git checkout master
+git merge upstream/master
+git commit -m "Merge changes from ropensci/master"
+git push origin master
+xdg-open .
+ls
+cd ..
+cd ..
+cd repositories/
+rm -rf essurvey_briatte/
+cd essurvey/
+git status
+rm .Rprofile 
+ls
+cd R
+ls
+ls -l
+rename
+for file in sqp_*.R; do mv -i "$file" "$me{file#sqp}"; done
+ls
+for file in sqp_*.R; do mv -i "$file" "me${file#sqp}"; done
+for file in sqp_*.R; do mv -i "$file" "me${file#sqp}"; do
+ls
+for file in sqp_*.R; do mv -i "$file" "$me{file#sqp}"; do
+ls
+bash /tmp/test.sh
+ls
+bash /tmp/test.sh
+bash /tmp/test.sh
+ls
+rm -r-f {file#_}
+ls
+pwd
+ls
+mv _cmv_cov.R me_cmv_cov.R
+ls
+mv _construct.R me_construct.R
+ls
+mv _correlate_covariance.R me_correlate_covariance.R
+ls
+me _rbind_metrics.R me_rbind_metrics.R
+ls
+mv _rbind_metrics.R me_rbind_metrics.R
+ls
+mv _sscore.R me_sscore.R
+ls
+cd tests/testthat/
+ls
+mv test-sqp_sscore.R test-me_sscore.R
+ls
+mv test-sqp_cmv_cor_cov.R test-me_cmv_cor_cov.R
+mv test-sqp_cmv_cor_cov.R test-me_cmv_cor_cov.R
+ls
+mv 
+ls
+mv test-sqp_correlate_covariance.R test-me_correlate_covariance.R
+ls
+mv test-sqp_reconstruct.R test-me_reconstruct.R
+mv test-sqp_construct.R test-me_construct.R
+ls
+ls
+ls
+cd ..
+ls
+cd ..
+cd R
+ls
+mv me_cmv.R me_cmv_cor.R
+ls
+mv test.txt ~/google_drive/daily_musings/primer_geographicalmobility.txt
+ls
+ls
+rm -rf ESS_Spain/
+ls
+rm highersddf_rounds.tx 
