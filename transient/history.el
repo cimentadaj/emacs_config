@@ -7,10 +7,10 @@
  (magit-log
   ("-n256" "--graph" "--color" "--decorate")
   ("-n256" "--graph" "--decorate"))
+ (magit-merge nil)
  (magit-pull nil)
- (magit-push
-  ("--force")
-  nil)
+ (magit-push nil
+	     ("--force"))
  (magit-revert
   ("--edit"))
  (magit-stash nil

@@ -30,11 +30,9 @@
 ;; (setq toggle-truncate-lines t)
 ;; (setq truncate-partial-width-windows nil)
 
-;; ;; On startup open TODO list
-(find-file "~/google_drive/gtd/inbox.org")
-
 ;; Remaps kill this buffer to familiar CTRL + W
 (global-set-key [(control w)] 'kill-this-buffer)
+(global-set-key (kbd "M-k")  'kill-region)
 (global-set-key (kbd "M-k")  'kill-region)
 
 ;; store all backup and autosave files in the tmp dir
@@ -61,6 +59,10 @@
   :ensure t
   :config (smartparens-global-mode t))
 
+;; To highlight some text and press * to wrap it in * *
+(sp-with-modes '(org-mode)
+  (sp-local-pair "*" "*"))
+
 (setq-default
  whitespace-line-column 80
  whitespace-style       '(face lines-tail))
@@ -70,17 +72,48 @@
 (setq-default fill-column 80)
 
 (use-package org-bullets
-	:ensure t
-	:config
-	(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 ;;        (add-hook 'text-mode-hook 'flyspell-mode))
+
+(use-package org
+  :bind (:map org-mode-map
+	      ("M-n" . eval-region)))
+
+(with-eval-after-load 'org
+  (bind-key "M-n" #'eval-region org-mode-map))
 
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((R . t)))
 
 (global-set-key (kbd "C-c l") 'org-store-link)
-  (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c b") 'org-switchb)
+
+(setq org-todo-keywords'
+      ((sequence "TODO" "IN PROCESS" "WAITING" "|" "DONE"))
+      )
+
+;; To archive all TODO's in an org file.
+;; Taken from https://stackoverflow.com/questions/6997387/how-to-archive-all-the-done-tasks-using-a-single-command/27043756#27043756
+(defun org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries
+   (lambda ()
+     (org-archive-subtree)
+     (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
+   "/DONE" 'file))
+
+(global-set-key (kbd "C-x C-a C-a") 'org-archive-done-tasks)
+
+;; Sets a closed timestamp
+(setq org-log-done 'time)
+
+;; Prompts for a note after TODO is set to DONE
+(setq org-log-done 'note)
 
 (setq org-agenda-files (list "~/google_drive/gtd/inbox.org"))
 
@@ -88,7 +121,10 @@
   (interactive "P")
   (org-agenda arg "n"))
 
-(define-key global-map (kbd "C-c a") 'cj-org-agenda-show-agenda-and-todo)
+;; (define-key global-map (kbd "C-c a") 'cj-org-agenda-show-agenda-and-todo)
+
+;; ;; On startup open TODO list
+(find-file "~/google_drive/gtd/inbox.org")
 
 (defalias 'list-buffers 'ibuffer)
 
@@ -170,8 +206,6 @@
 
 (use-package doom-themes
   :ensure t)
-
-
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -519,15 +553,55 @@
 
 (pending-delete-mode t)
 
-(setq package-check-signature nil)
+;; Go https://console.developers.google.com/apis/credentials/oauthclient/672622840611-q5j91p8rojnjf5sghgvems2kjkhslg9v.apps.googleusercontent.com?project=emacs-gcal-251211&folder&organizationId
+;; to find your client-id and client-secret
+;; (setq package-check-signature nil)
 
 
-(use-package org-gcal
-  :ensure t
-  :config
-  (setq org-gcal-client-id "672622840611-q5j91p8rojnjf5sghgvems2kjkhslg9v.apps.googleusercontent.com"
-	org-gcal-client-secret "tRXHk5VgQGBIyOMo1wu917pK"
-	org-gcal-file-alist '(("cimentadaj@gmail.com"))))
+;; (use-package org-gcal
+;;   :ensure t
+;;   :config
+;;   (setq org-gcal-client-id ""
+;; 	org-gcal-client-secret ""
+;; 	org-gcal-file-alist '(("cimentadaj@gmail.com"))))
 
-(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
-(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+;; (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+;; (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+
+(defun go-to-projects ()
+  (interactive)
+  (find-file "~/google_drive/gtd/inbox.org")
+  (widen)
+  (beginning-of-buffer)
+  (re-search-forward "* Projects")
+  (beginning-of-line))
+
+(defun project-overview ()
+  (interactive)
+  (go-to-projects)
+  (org-narrow-to-subtree)
+  (org-cycle))
+
+(defun my-new-daily-review ()
+  (interactive)
+  (let ((org-capture-templates '(("d" "Review: Daily Review" entry (file+olp+datetree "/tmp/daily_reviews.org")
+				  (file "~/google_drive/gtd/dailyreviewtemplate.org")))))
+    (progn
+      (org-capture nil "d")
+      (org-capture-finalize t)
+      (org-speed-move-safe 'outline-up-heading)
+      (org-narrow-to-subtree)
+      (fetch-calendar)
+      (org-clock-in))))
+
+(defun my-new-weekly-review ()
+  (interactive)
+  (let ((org-capture-templates '(("w" "Review: Weekly Review" entry (file+olp+datetree "/tmp/weekly_reviews.org")
+				  (file "~/google_drive/gtd/weeklyreviewtemplate.org")))))
+    (progn
+      (org-capture nil "d")
+      (org-capture-finalize t)
+      (org-speed-move-safe 'outline-up-heading)
+      (org-narrow-to-subtree)
+      (fetch-calendar)
+      (org-clock-in))))

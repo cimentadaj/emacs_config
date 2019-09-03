@@ -2,11 +2,16 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-refile-last-stored"
+(("org-capture-last-stored"
+ (filename . "/tmp/daily_reviews.org")
+ (front-context-string . "**** Daily Revie")
+ (rear-context-string . "9-09-03 Tuesday\n")
+ (position . 53))
+("org-refile-last-stored"
  (filename . "~/google_drive/gtd/inbox.org")
- (front-context-string . "** TODO My new t")
- (rear-context-string . "         :work:\n")
- (position . 35155))
+ (front-context-string . "** IN PROCESS [#")
+ (rear-context-string . " :burocratic:\n\n\n")
+ (position . 3406))
 ("le"
  (filename . "~/google_drive/gtd/inbox.org")
  (front-context-string . "\n   - [ ] https:")

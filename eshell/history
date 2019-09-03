@@ -1,65 +1,3 @@
-ls
-mkdir irene/presupuesto_piraguas
-ls
-mkdir -r irene/presupuesto_piraguas
-mkdir irene
-mkdir irene/presupuesto_piraguas
-mv intro.txt ~/google_drive/berlin_apartment_application/
-cd ../../repositories/cimentadaj.github.io/
-ls
-git status
-ls
-xdg-open .
-R
-R
-R
-R
-R
-clear
-bash public_update.sh
-cd ../../repositories/cimentadaj.github.io/
-ls
-git status
-bash public_update.sh
-R
-git status
-bash public_update.sh
-git status
-git status
-bash public_update.sh
-R
-git status
-bash public_update.sh
-ls
-rm README.html
-ls
-ls
-mkdir figs
-mv UPF.png figs/upf.png
-ls
-rm styles.css 
-ls
-ls figs
-ls
-rm test.R 
-cd ..
-ls
-git status
-git branch
-git remote -v
-cd ../essurvey_briatte/
-ls
-git remote add upstream https://github.com/ropensci/essurvey.git
-git fetch upstream
-git checkout master
-git merge upstream/master
-git commit -m "Merge changes from ropensci/master"
-git push origin master
-xdg-open .
-ls
-cd ..
-cd ..
-cd repositories/
 rm -rf essurvey_briatte/
 cd essurvey/
 git status
@@ -126,3 +64,65 @@ ls
 rm -rf ESS_Spain/
 ls
 rm highersddf_rounds.tx 
+ls
+mv test-show_.R test-1-show_.R
+mv test-country.R test-2-country.R
+mv test-rounds.R test-3-rounds.R
+mv test-recode_missings.R test-4-recode_missings.R
+ls
+mv test-country_lookup.R test-5-country_lookup.R
+ls
+mv test-5-country_lookup.R test-6-country_lookup.R
+ls
+mv tests-download_format.R tests-6-download_format.R
+ls
+mv tests-5-download_format.R tests-5-download_format.R
+mv tests-6-download_format.R tests-5-download_format.R
+ls
+mv tests-5-download_format.R test-5-download_format.R
+ls
+mv test-set_email.R test-7-set_email.R
+ls
+mv R/show_sddf_rounds.R R/show_sddf_cntrounds.R
+cd /home/jorge/google_drive/recsm/jorge_20190724//round_6/BG/BUL/evaluation_of_immigration
+ls
+cp lisrel_testfile/r4-satisf-BE-base-cm.OUT ~/google_drive/recsm/round_4/BE/FRE/political_satisfaction/
+ls ~/google_drive/recsm/round_4/BE/FRE/political_satisfaction/
+cp ~/google_drive/recsm/round_4/BE/FRE/political_satisfaction/r4-satisf-BE-base-cm.OUT ~/google_drive/recsm/jorge_20190724/round_4/BE/FRE/political_satisfaction/
+cd ..
+ls
+rm -rf docs
+ls
+cd ../..
+cd tests/testthat/
+ls
+cat test-5-download_format.R 
+cat test-7-set_email.R 
+rm test-5-download_format.R 
+ls
+rm helper-data.R 
+ls
+ls
+ls
+cd ../google_drive/gtd/
+rm dailyreviewtemplate.org/
+rm -rf dailyreviewtemplate.org/
+touch dailyreviewtemplate.org
+ls
+rm dailyreviewtemplate.ord
+ls
+cat gtd.org
+rm gtd.org
+ls
+cat someday.org 
+rm someday.org 
+ls
+cat tickler.org 
+rm tickler.org 
+ls
+ls test/
+rm test/
+ls
+rm -rf test/
+ls
+touch weeklyreviewtemplate.org

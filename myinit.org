@@ -37,13 +37,10 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
     ;; (setq toggle-truncate-lines t)
     ;; (setq truncate-partial-width-windows nil)
 
-    ;; ;; On startup open TODO list
-    (find-file "~/google_drive/gtd/inbox.org")
-
     ;; Remaps kill this buffer to familiar CTRL + W
     (global-set-key [(control w)] 'kill-this-buffer)
     (global-set-key (kbd "M-k")  'kill-region)
-
+    (global-set-key (kbd "M-k")  'kill-region)
   #+END_SRC
 
 * Save all temporary files in auto-save
@@ -88,59 +85,103 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
      (use-package smartparens
        :ensure t
        :config (smartparens-global-mode t))
+
+     ;; To highlight some text and press * to wrap it in * *
+     (sp-with-modes '(org-mode)
+       (sp-local-pair "*" "*"))
+
    #+END_SRC
 
 * Adds 80 character line tweaks
   #+BEGIN_SRC emacs-lisp
 
-   (setq-default
-    whitespace-line-column 80
-    whitespace-style       '(face lines-tail))
+    (setq-default
+     whitespace-line-column 80
+     whitespace-style       '(face lines-tail))
 
-   (add-hook 'prog-mode-hook #'whitespace-mode)
+    (add-hook 'prog-mode-hook #'whitespace-mode)
 
-   (setq-default fill-column 80)
+    (setq-default fill-column 80)
 
-#+END_SRC
+  #+END_SRC
 * org-mode
 ** Installs and loads org-mode + adds flyspell for spell-checking
    - See http://pragmaticemacs.com/emacs/check-and-fix-spelling-as-you-type/ for the spell-checking part. I've removed flyspell because it needs to be installed in the computer
- #+BEGIN_SRC emacs-lisp
-      (use-package org-bullets
-	:ensure t
-	:config
-	(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
-;;        (add-hook 'text-mode-hook 'flyspell-mode))
- #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-bullets
+       :ensure t
+       :config
+       (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+     ;;        (add-hook 'text-mode-hook 'flyspell-mode))
+
+     (use-package org
+       :bind (:map org-mode-map
+		   ("M-n" . eval-region)))
+
+     (with-eval-after-load 'org
+       (bind-key "M-n" #'eval-region org-mode-map))
+
+   #+END_SRC
 
 ** Adds languages to org-mode
 
-#+BEGIN_SRC emacs-lisp
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((R . t)))
+   #+BEGIN_SRC emacs-lisp
+     (org-babel-do-load-languages
+      'org-babel-load-languages
+      '((R . t)))
 
-#+END_SRC
+   #+END_SRC
 
 ** Setup org-mode
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-c l") 'org-store-link)
-  (global-set-key (kbd "C-c c") 'org-capture)
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-c l") 'org-store-link)
+     (global-set-key (kbd "C-c c") 'org-capture)
+     (global-set-key (kbd "C-c a") 'org-agenda)
+     (global-set-key (kbd "C-c b") 'org-switchb)
 
-(setq org-agenda-files (list "~/google_drive/gtd/inbox.org"))
+     (setq org-todo-keywords'
+	   ((sequence "TODO" "IN PROCESS" "WAITING" "|" "DONE"))
+	   )
+
+     ;; To archive all TODO's in an org file.
+     ;; Taken from https://stackoverflow.com/questions/6997387/how-to-archive-all-the-done-tasks-using-a-single-command/27043756#27043756
+     (defun org-archive-done-tasks ()
+       (interactive)
+       (org-map-entries
+	(lambda ()
+	  (org-archive-subtree)
+	  (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
+	"/DONE" 'file))
+
+     (global-set-key (kbd "C-x C-a C-a") 'org-archive-done-tasks)
+
+     ;; Sets a closed timestamp
+     (setq org-log-done 'time)
+
+     ;; Prompts for a note after TODO is set to DONE
+     (setq org-log-done 'note)
+
+     (setq org-agenda-files (list "~/google_drive/gtd/inbox.org"))
 #+END_SRC
 
 ** Setup org-agenda
 #+BEGIN_SRC emacs-lisp
-(defun cj-org-agenda-show-agenda-and-todo (&optional arg)
-  (interactive "P")
-  (org-agenda arg "n"))
+  (defun cj-org-agenda-show-agenda-and-todo (&optional arg)
+    (interactive "P")
+    (org-agenda arg "n"))
 
-(define-key global-map (kbd "C-c a") 'cj-org-agenda-show-agenda-and-todo)
+  ;; (define-key global-map (kbd "C-c a") 'cj-org-agenda-show-agenda-and-todo)
 
 
 #+END_SRC
 
+* On startup
+Do not move this to the front because I do stuff in ~~org-mode~~ which affects org files
+** Open inbox
+#+BEGIN_SRC emacs-lisp
+    ;; ;; On startup open TODO list
+    (find-file "~/google_drive/gtd/inbox.org")
+#+END_SRC
 * List buffers
 ** Switch list-buffer to ibuffer
  #+BEGIN_SRC emacs-lisp
@@ -255,8 +296,6 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
   (use-package doom-themes
     :ensure t)
 
-
-
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
 	doom-themes-enable-italic t) ; if nil, italics is universally disabled
@@ -276,6 +315,7 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config)
+
  #+END_SRC
 
 * Projectile
@@ -700,5 +740,67 @@ This file is called from ~init.el~ which has the definition of the MELPA reposit
 
   ;; (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
   ;; (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+
+#+END_SRC
+* [[https://praxis.fortelabs.co/the-p-a-r-a-method-a-universal-system-for-organizing-digital-information-75a9da8bfb37/][P.A.R.A]]
+** Functions to move faster acros [[https://praxis.fortelabs.co/the-p-a-r-a-method-a-universal-system-for-organizing-digital-information-75a9da8bfb37/][P.A.R.A]]
+#+BEGIN_SRC emacs-lisp
+
+  (defun go-to-projects ()
+    (interactive)
+    (find-file "~/google_drive/gtd/inbox.org")
+    (widen)
+    (beginning-of-buffer)
+    (re-search-forward "* Projects")
+    (beginning-of-line))
+
+  (defun project-overview ()
+    (interactive)
+    (go-to-projects)
+    (org-narrow-to-subtree)
+    (org-cycle))
+
+#+END_SRC
+** Functions to navigate quickly to org-agenda
+#+BEGIN_SRC emacs-lisp
+
+  (defun go-to-today ()
+    (interactive)
+    (org-agenda nil "n")
+    (org-agenda-goto-today)
+    (org-agenda-day-view)
+    (re-search-forward "Global list of TODO items of type: ALL")
+    (beginning-of-line)
+    (re-search-forward "project")
+    (beginning-of-line)
+    )
+
+#+END_SRC
+** Functions for daily/weekly review
+#+BEGIN_SRC emacs-lisp
+
+  (defun my-new-daily-review ()
+    (interactive)
+    (let ((org-capture-templates '(("d" "Review: Daily Review" entry (file+olp+datetree "/tmp/daily_reviews.org")
+				    (file "~/google_drive/gtd/dailyreviewtemplate.org")))))
+      (progn
+	(org-capture nil "d")
+	(org-capture-finalize t)
+	(org-speed-move-safe 'outline-up-heading)
+	(org-narrow-to-subtree)
+	(fetch-calendar)
+	(org-clock-in))))
+
+  (defun my-new-weekly-review ()
+    (interactive)
+    (let ((org-capture-templates '(("w" "Review: Weekly Review" entry (file+olp+datetree "/tmp/weekly_reviews.org")
+				    (file "~/google_drive/gtd/weeklyreviewtemplate.org")))))
+      (progn
+	(org-capture nil "d")
+	(org-capture-finalize t)
+	(org-speed-move-safe 'outline-up-heading)
+	(org-narrow-to-subtree)
+	(fetch-calendar)
+	(org-clock-in))))
 
 #+END_SRC

@@ -15,12 +15,16 @@ org-mode
 * C-c C-o to click on the link
 * <s then TAB, to create a code block
 * M-x eval region to evaluate an emacs lisp region
-* To store another file link (or specific place in the article), go to the article and M-x org-store-link, then go to where you want to put the link and press C-c C-l
+* To store another file link (or specific place in the article), go to the article and C-c l, then go to where you want to put the link and press C-c C-l
 * C-c C-n (org-next-visible-heading) Next heading.
 * C-c C-p (org-previous-visible-heading) Previous heading.
 * C-c C-b (org-backward-heading-same-level) Previous heading same level.
 * C-c C-u (outline-up-heading) Backward to higher level heading.
 * ALT- -> or <- to decrease levels
+* M-x org-archive-set-tag para poner el tag de archived
+
+
+Condensced org-mode tutorial: https://orgmode.org/orgguide.pdf
 
 ****************************************************************************************************
 ESS
