@@ -115,13 +115,28 @@
 ;; Prompts for a note after TODO is set to DONE
 (setq org-log-done 'note)
 
-(setq org-agenda-files (list "~/google_drive/gtd/inbox.org"))
+;; (defun cj-org-agenda-show-agenda-and-todo (&optional arg)
+;;   (interactive "P")
+;;   (org-agenda arg "n"))
 
-(defun cj-org-agenda-show-agenda-and-todo (&optional arg)
-  (interactive "P")
-  (org-agenda arg "n"))
 
 ;; (define-key global-map (kbd "C-c a") 'cj-org-agenda-show-agenda-and-todo)
+
+(setq org-agenda-files
+      (list "~/google_drive/gtd/inbox.org" "~/google_drive/gtd/gcal.org"))
+
+(setq org-capture-templates
+      '(("a" "Appointment" entry (file  "~/google_drive/gtd/gcal.org" )
+	 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
+	("t" "To Do Item" entry (file+headline "~/google_drive/gtd/inbox.org" "To Do")
+	 "* TODO %?\n%u" :prepend t)))
+
+;; from http://emacswiki.org/emacs/InsertingTodaysDate
+(defun insert-todays-date (arg)
+  (interactive "P")
+  (insert (if arg
+	      (format-time-string "%d-%m-%Y")
+	    (format-time-string "%Y-%m-%d"))))
 
 ;; ;; On startup open TODO list
 (find-file "~/google_drive/gtd/inbox.org")
@@ -555,18 +570,22 @@
 
 ;; Go https://console.developers.google.com/apis/credentials/oauthclient/672622840611-q5j91p8rojnjf5sghgvems2kjkhslg9v.apps.googleusercontent.com?project=emacs-gcal-251211&folder&organizationId
 ;; to find your client-id and client-secret
-;; (setq package-check-signature nil)
+;; I stored both these in txt files on my Drive for security reasons
 
+(use-package org-gcal
+   :ensure t
+   :config
+   (setq org-gcal-client-id (when (file-exists-p "~/google_drive/gtd/")
+   			       (load "~/google_drive/gtd/client_id.txt"))
+      org-gcal-client-secret (when (file-exists-p "~/google_drive/gtd/")
+   			       (load "~/google_drive/gtd/client_secret.txt")) 
+      org-gcal-file-alist '(("cimentadaj@gmail.com" . "~/google_drive/gtd/gcal.org"))))
 
-;; (use-package org-gcal
-;;   :ensure t
-;;   :config
-;;   (setq org-gcal-client-id ""
-;; 	org-gcal-client-secret ""
-;; 	org-gcal-file-alist '(("cimentadaj@gmail.com"))))
+ (setq package-check-signature nil)
+ (setq org-gcal-notify-p nil)
 
-;; (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
-;; (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+ (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+ (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 
 (defun go-to-projects ()
   (interactive)
@@ -582,6 +601,17 @@
   (org-narrow-to-subtree)
   (org-cycle))
 
+(defun go-to-today ()
+  (interactive)
+  (org-agenda nil "n")
+  (org-agenda-goto-today)
+  (org-agenda-day-view)
+  (re-search-forward "Global list of TODO items of type: ALL")
+  (beginning-of-line)
+  (re-search-forward "project")
+  (beginning-of-line)
+  )
+
 (defun my-new-daily-review ()
   (interactive)
   (let ((org-capture-templates '(("d" "Review: Daily Review" entry (file+olp+datetree "/tmp/daily_reviews.org")
@@ -594,6 +624,10 @@
       (fetch-calendar)
       (org-clock-in))))
 
+(defun work-statistics ()
+  (interactive)
+  (find-file "~/google_drive/gtd/work_statistics.org"))
+
 (defun my-new-weekly-review ()
   (interactive)
   (let ((org-capture-templates '(("w" "Review: Weekly Review" entry (file+olp+datetree "/tmp/weekly_reviews.org")
@@ -605,3 +639,11 @@
       (org-narrow-to-subtree)
       (fetch-calendar)
       (org-clock-in))))
+
+;;  space and then search for next comma:
+;;  to ident columns such as in dplyr::select or arguments in function
+
+ ;; (fset 'sc
+ ;;    [return ?\C-s ?, return])
+
+ ;; (global-set-key (kbd "M-<f3>") 'sc)

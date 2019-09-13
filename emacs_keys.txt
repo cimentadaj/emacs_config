@@ -209,6 +209,8 @@ file so just press enter.
 
 * C-M-SPC mark-sexp Put the mark at the end of the sexp.
 
+* C-x c M-y will show the history of the kill ring with helm-show-kill-ring
+
 ****************************************************************************************************
 marks, bookmarks and helm
 ****************************************************************************************************
@@ -219,3 +221,19 @@ marks, bookmarks and helm
 * C-x r m bookmark <RET> sets a Bookmark by the name of bookmark
 * helm-bookmarks searchers for any bookmarks
 * C-x r b to search for any bookmark
+
+****************************************************************************************************
+converting to cases, lower case, upper case
+****************************************************************************************************
+
+* M-l Convert following word to lower case (downcase-word).
+* M-u Convert following word to upper case (upcase-word).
+* M-c Capitalize the following word (capitalize-word).
+* C-x C-l Convert region to lower case (downcase-region).
+* C-x C-u Convert region to upper case (upcase-region). 
+
+
+****************************************************************************************************
+Rmarkdown usage
+****************************************************************************************************
+https://polymode.github.io/usage/

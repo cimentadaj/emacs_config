@@ -5,13 +5,13 @@
 (("org-capture-last-stored"
  (filename . "/tmp/daily_reviews.org")
  (front-context-string . "**** Daily Revie")
- (rear-context-string . "9-09-03 Tuesday\n")
- (position . 53))
+ (rear-context-string . " [ ] Clock out.\n")
+ (position . 5592))
 ("org-refile-last-stored"
  (filename . "~/google_drive/gtd/inbox.org")
- (front-context-string . "** IN PROCESS [#")
- (rear-context-string . " :burocratic:\n\n\n")
- (position . 3406))
+ (front-context-string . "** TODO [#A] DDS")
+ (rear-context-string . "######][aqui]].\n")
+ (position . 20096))
 ("le"
  (filename . "~/google_drive/gtd/inbox.org")
  (front-context-string . "\n   - [ ] https:")

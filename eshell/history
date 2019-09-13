@@ -1,49 +1,3 @@
-rm -rf essurvey_briatte/
-cd essurvey/
-git status
-rm .Rprofile 
-ls
-cd R
-ls
-ls -l
-rename
-for file in sqp_*.R; do mv -i "$file" "$me{file#sqp}"; done
-ls
-for file in sqp_*.R; do mv -i "$file" "me${file#sqp}"; done
-for file in sqp_*.R; do mv -i "$file" "me${file#sqp}"; do
-ls
-for file in sqp_*.R; do mv -i "$file" "$me{file#sqp}"; do
-ls
-bash /tmp/test.sh
-ls
-bash /tmp/test.sh
-bash /tmp/test.sh
-ls
-rm -r-f {file#_}
-ls
-pwd
-ls
-mv _cmv_cov.R me_cmv_cov.R
-ls
-mv _construct.R me_construct.R
-ls
-mv _correlate_covariance.R me_correlate_covariance.R
-ls
-me _rbind_metrics.R me_rbind_metrics.R
-ls
-mv _rbind_metrics.R me_rbind_metrics.R
-ls
-mv _sscore.R me_sscore.R
-ls
-cd tests/testthat/
-ls
-mv test-sqp_sscore.R test-me_sscore.R
-ls
-mv test-sqp_cmv_cor_cov.R test-me_cmv_cor_cov.R
-mv test-sqp_cmv_cor_cov.R test-me_cmv_cor_cov.R
-ls
-mv 
-ls
 mv test-sqp_correlate_covariance.R test-me_correlate_covariance.R
 ls
 mv test-sqp_reconstruct.R test-me_reconstruct.R
@@ -126,3 +80,49 @@ ls
 rm -rf test/
 ls
 touch weeklyreviewtemplate.org
+cd ch1_figs/
+ls
+rm success_mark.jpeg
+cd ch1_figs/
+rm fail_mark.jpg
+cd ch1_figs/
+ls
+rm half_coef_plot_1.png 
+rm coef_plot_2.png
+rm -rf vignettes/case-study-ess.R
+ls
+ls
+rm test.txt
+ls
+mkdir ch2_figs
+cp ch1_figs/success_mark.png ch2_figs/
+cd ..
+cd berlin_apartment_application/
+ls
+ls
+mv end_dailyreview.org work_statistics.org
+sudo apt-get install cargo
+cp ch2_figs/success_mark.png ch3_figs/
+cp ch1_figs/fail_mark.png ch3_figs/
+cd ..
+cd mpidr/mpidr_receipts/
+ls
+touch R/dv_analysis.Rmd
+ls
+cat merge_2.R 
+ls
+ls DATA
+ls DATA/FINAL/
+rm -rf ~/.emacs.d/org-gcal/.org-gcal-token
+rm -rf ~/.emacs.d/org-gcal/
+ls
+ls -l
+ls elpa
+cd elpa
+cd ~/google_drive/gtd/
+ls
+touch gcal.org
+ls
+ls elpa/
+cd elpa/
+ls
