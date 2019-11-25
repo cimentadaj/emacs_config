@@ -19,13 +19,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(flycheck-lintr-linters
-   "with_defaults(trailing_whitespace_linter = NULL, commented_code_linter = NULL)")
+   "with_defaults(trailing_whitespace_linter = NULL, commented_code_linter = NULL, camel_case_linter = NULL, snake_case_linter = NULL, object_usage_linter = NULL)")
  '(org-agenda-files
    (quote
     ("~/google_drive/gtd/gcal.org" "~/google_drive/gtd/inbox.org")))
  '(package-selected-packages
    (quote
-    (jedi company-jedi company-quickhelp flycheck free-keys expand-region easy-kill elpy doom-modeline doom-themes tao-theme poet-theme faff-theme zerodark-theme alect-themes base16-theme zenburn-theme color-theme-modern magit stan-snippets stan-mode poly-R yaml-mode helm-ag helm-projectile ag counsel-projectile projectile which-key use-package try smartparens org-ref org-bullets moe-theme ewal-spacemacs-themes ewal-spacemacs-theme ess dracula-theme counsel company auto-complete ace-window))))
+    (org-gcal jedi company-jedi company-quickhelp flycheck free-keys expand-region easy-kill elpy doom-modeline doom-themes tao-theme poet-theme faff-theme zerodark-theme alect-themes base16-theme zenburn-theme color-theme-modern magit stan-snippets stan-mode poly-R yaml-mode helm-ag helm-projectile ag counsel-projectile projectile which-key use-package try smartparens org-ref org-bullets moe-theme ewal-spacemacs-themes ewal-spacemacs-theme ess dracula-theme counsel company auto-complete ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

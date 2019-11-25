@@ -343,16 +343,16 @@ Do not move this to the front because I do stuff in ~~org-mode~~ which affects o
 
 * Projectile
 #+BEGIN_SRC emacs-lisp
-;; If you find an error, ag needs to be installed from terminal as well.
-;; homebrew install the_silver_searcher for macs
-;; sudo apt-get install silversearcher-ag from ubuntu
+  ;; If you find an error, ag needs to be installed from terminal as well.
+  ;; homebrew install the_silver_searcher for macs
+  ;; sudo apt-get install silversearcher-ag from ubuntu
 
   ;; Helm search for projectile. Allows to search for files within a project
   (use-package helm-projectile
     :ensure t
     :config
     (helm-projectile-on))
-  
+
   ;; Needed by helm-projectile for esearch
   (use-package helm-ag
     :ensure t)
@@ -362,14 +362,14 @@ Do not move this to the front because I do stuff in ~~org-mode~~ which affects o
     :bind ("C-c p" . projectile-command-map)
     :config
     (projectile-global-mode)
-  (setq projectile-completion-system 'helm)
-  (setq projectile-switch-project-action 'helm-projectile))
+    (setq projectile-completion-system 'helm)
+    (setq projectile-switch-project-action 'helm-projectile))
+  (projectile-discover-projects-in-directory "~/repositories/")
 
-
-    ;; (use-package counsel-projectile
-    ;; :ensure t
-    ;; :config
-    ;; ;; (counsel-projectile-mode))
+  ;; (use-package counsel-projectile
+  ;; :ensure t
+  ;; :config
+  ;; ;; (counsel-projectile-mode))
 
 #+END_SRC
 * ESS for statistics
@@ -841,9 +841,9 @@ Do not move this to the front because I do stuff in ~~org-mode~~ which affects o
   ;;  space and then search for next comma:
   ;;  to ident columns such as in dplyr::select or arguments in function
 
-   ;; (fset 'sc
-   ;;    [return ?\C-s ?, return])
+  ;; (fset 'sc
+  ;;    [return ?\C-s ?, return])
 
-   ;; (global-set-key (kbd "M-<f3>") 'sc)
+  ;; (global-set-key (kbd "M-<f3>") 'sc)
 
 #+END_SRC
