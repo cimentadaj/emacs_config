@@ -5,8 +5,8 @@
 (("org-capture-last-stored"
  (filename . "/tmp/daily_reviews.org")
  (front-context-string . "**** Daily Revie")
- (rear-context-string . "10-30 Wednesday\n")
- (position . 1459))
+ (rear-context-string . " [ ] Clock out.\n")
+ (position . 1434))
 ("org-refile-last-stored"
  (filename . "~/google_drive/gtd/inbox.org")
  (front-context-string . "** TODO [#A] Pre")

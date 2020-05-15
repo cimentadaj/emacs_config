@@ -1,128 +1,128 @@
-mv test-sqp_correlate_covariance.R test-me_correlate_covariance.R
+git pull
+cd covid_project/
+git pull
 ls
-mv test-sqp_reconstruct.R test-me_reconstruct.R
-mv test-sqp_construct.R test-me_construct.R
+rm -rf %
+git status
+cd ~/repositories/
+git clone https://github.com/cimentadaj/tune.git
+cat Margins/APR_age_by_country_all_poly_*
+cat Margins/APR_age_by_country_all_poly_de.csv
+git status
+cd ../Margins/
 ls
+ls old
+mv old/APR_overall_by_country_all_* ./
 ls
+mv old/APR_overall_by_country_work_poly_* ./
+mv old/APR_overall_by_country_gencom_* ./
 ls
 cd ..
+cd Margins/
 ls
-cd ..
-cd R
+ls old/
+cd ~/repositories/
+git clone https://github.com/cimentadaj/covid_age.git
+git remote add upstream https://github.com/timriffe/covid_age.git
+git remote -v
+git pull upstream
+git push
+git status
+git pull upstream master
+git commit
+git commit -m "Merge with upstream repo"
+git push
+cd ~/repositories/
 ls
-mv me_cmv.R me_cmv_cor.R
-ls
-mv test.txt ~/google_drive/daily_musings/primer_geographicalmobility.txt
-ls
-ls
-rm -rf ESS_Spain/
-ls
-rm highersddf_rounds.tx 
-ls
-mv test-show_.R test-1-show_.R
-mv test-country.R test-2-country.R
-mv test-rounds.R test-3-rounds.R
-mv test-recode_missings.R test-4-recode_missings.R
-ls
-mv test-country_lookup.R test-5-country_lookup.R
-ls
-mv test-5-country_lookup.R test-6-country_lookup.R
-ls
-mv tests-download_format.R tests-6-download_format.R
-ls
-mv tests-5-download_format.R tests-5-download_format.R
-mv tests-6-download_format.R tests-5-download_format.R
-ls
-mv tests-5-download_format.R test-5-download_format.R
-ls
-mv test-set_email.R test-7-set_email.R
-ls
-mv R/show_sddf_rounds.R R/show_sddf_cntrounds.R
-cd /home/jorge/google_drive/recsm/jorge_20190724//round_6/BG/BUL/evaluation_of_immigration
-ls
-cp lisrel_testfile/r4-satisf-BE-base-cm.OUT ~/google_drive/recsm/round_4/BE/FRE/political_satisfaction/
-ls ~/google_drive/recsm/round_4/BE/FRE/political_satisfaction/
-cp ~/google_drive/recsm/round_4/BE/FRE/political_satisfaction/r4-satisf-BE-base-cm.OUT ~/google_drive/recsm/jorge_20190724/round_4/BE/FRE/political_satisfaction/
-cd ..
-ls
-rm -rf docs
-ls
-cd ../..
-cd tests/testthat/
-ls
-cat test-5-download_format.R 
-cat test-7-set_email.R 
-rm test-5-download_format.R 
-ls
-rm helper-data.R 
-ls
-ls
-ls
-cd ../google_drive/gtd/
-rm dailyreviewtemplate.org/
-rm -rf dailyreviewtemplate.org/
-touch dailyreviewtemplate.org
-ls
-rm dailyreviewtemplate.ord
-ls
-cat gtd.org
-rm gtd.org
-ls
-cat someday.org 
-rm someday.org 
-ls
-cat tickler.org 
-rm tickler.org 
-ls
-ls test/
-rm test/
-ls
-rm -rf test/
-ls
-touch weeklyreviewtemplate.org
-cd ch1_figs/
-ls
-rm success_mark.jpeg
-cd ch1_figs/
-rm fail_mark.jpg
-cd ch1_figs/
-ls
-rm half_coef_plot_1.png 
-rm coef_plot_2.png
-rm -rf vignettes/case-study-ess.R
-ls
-ls
-rm test.txt
-ls
-mkdir ch2_figs
-cp ch1_figs/success_mark.png ch2_figs/
-cd ..
-cd berlin_apartment_application/
-ls
-ls
-mv end_dailyreview.org work_statistics.org
-sudo apt-get install cargo
-cp ch2_figs/success_mark.png ch3_figs/
-cp ch1_figs/fail_mark.png ch3_figs/
-cd ..
-cd mpidr/mpidr_receipts/
-ls
-touch R/dv_analysis.Rmd
-ls
-cat merge_2.R 
-ls
-ls DATA
-ls DATA/FINAL/
-rm -rf ~/.emacs.d/org-gcal/.org-gcal-token
-rm -rf ~/.emacs.d/org-gcal/
+git clone https://github.com/jlopezper/facebook_api_education.git
 ls
 ls -l
-ls elpa
-cd elpa
-cd ~/google_drive/gtd/
+ls -l -a
+rm -rf .Rhistory .secrets/
 ls
-touch gcal.org
+cd data
 ls
-ls elpa/
-cd elpa/
+mv ouput_data.csv output_data.csv
+ls
+ls
+cd ..
+cd ..
+ls
+cd R
+ls
+rm -rf test.R
+ls
+rm -rf man/basepop.Rd 
+git rm .Rhistory
+cd ~/repositories/
+git clone https://github.com/cimentadaj/dials.git
+xdg-open .
+cd ~/repositories/
+ls
+mkdir fb_gtrends
+cd fb_gtrends/
+ls
+mkdir data
+rm -rf compat-purrr.R 
+rm -rf compat-purrr.R 
+mkdir paper
+cd paper
+ls
+rm -rf paper.Rproj 
+cd paper
+ls
+cd measurementerror_paper/
+ls
+mv . ../
+ls
+ls
+mv ./* ../
+ls
+cd ..
+ls
+rm -rf measurementerror_paper/
+ls
+mkdir figs
+ls
+cd paper/
+ls
+cd figs/
+ls
+cp simplecomplex.svg ../
+cd ..
+ls
+cd paper/
+ls
+rm simplecomplex.svg 
+cd figs/
+ls
+unzip svgtopng.zip 
+ls
+rm svgtopng.zip 
+xdg-open .
+cd ..
+ls
+cd paper/
+ls
+cd figs/
+ls
+rm -rf *.svg
+ls
+cd ~/repositories/
+git clone https://github.com/cimentadaj/labormarket_covid.git
+cd labormarket_covid/
+ls
+R
+rm -rf R/my_new_function.R 
+ls
+cd ..
+ls
+cd ..
+ls
+cd R/
+ls
+rm -rf R
+ls
+ls
+rm -rf R
 ls

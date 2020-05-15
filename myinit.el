@@ -169,6 +169,10 @@
 ;; counsel is used by swiper so install before
 (use-package counsel
   :ensure t
+  :bind
+  (("M-y" . counsel-yank-pop)
+   :map ivy-minibuffer-map
+   ("M-y" . ivy-next-line))
   )
 
 (use-package swiper
@@ -228,7 +232,7 @@
 
 ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
 ;; may have their own settings.
-(load-theme 'doom-one t)
+(load-theme 'doom-dracula t)
 
 ;; Enable flashing mode-line on errors
 (doom-themes-visual-bell-config)
@@ -242,37 +246,136 @@
 ;; Corrects (and improves) org-mode's native fontification.
 (doom-themes-org-config)
 
+;; Taken partially from https://github.com/ianpan870102/.personal-emacs.d/blob/master/init.el
+;; START HERE
+
+;; (use-package spacemacs-common
+;;   :ensure spacemacs-theme
+;;   :custom-face
+;;   (line-number              ((t (:foreground "#414B4f" :background "#282B2E"))))
+;;   (line-number-current-line ((t (:foreground "#616B6f" :background "#282B2E"))))
+;;   (highlight-symbol-face    ((t (:background "#44444f"))))
+;;   :custom
+;;   (spacemacs-theme-comment-bg nil)
+;;   (spacemacs-theme-comment-italic t)
+;;   :config
+;;   (load -theme 'spacemacs-dark t))
+
+(use-package solaire-mode
+  :ensure t
+  :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+	 (minibuffer-setup . solaire-mode-in-minibuffer))
+  :config
+  (solaire-mode-swap-bg)
+  (solaire-global-mode +1))
+
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  (inhibit-compacting-font-caches t)
+  (doom-modeline-buffer-file-name-style 'relative-from-project)
+  (doom-modeline-bar-width 1)
+  (doom-modeline-modal-icon nil)
+  (doom-modeline-height 15)
+  (doom-modeline-env-python-executable "python3")
+  :config
+  (when (member "Menlo" (font-family-list))
+    (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
+    (set-face-attribute 'mode-line-inactive nil :height 110 :font "Menlo")))
+
+(use-package all-the-icons
+  :ensure t
+  :custom
+  (all-the-icons-scale-factor 1.0))
+
+(use-package all-the-icons-ivy
+  :ensure t
+  :hook (after-init . all-the-icons-ivy-setup)
+  :custom
+  (all-the-icons-ivy-buffer-commands '()))
+
+(use-package all-the-icons-dired
+  :ensure t
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+;; (use-package centaur-tabs
+;;   :demand
+;;   :bind (("C-S-<tab>" . centaur-tabs-backward)
+;; 	 ("C-<tab>" . centaur-tabs-forward)
+;; 	 ("C-x p" . centaur-tabs-counsel-switch-group))
+;;   :custom
+;;   (centaur-tabs-set-bar 'under)
+;;   (x-underline-at-descent-line t)
+;;   (centaur-tabs-set-modified-marker t)
+;;   (centaur-tabs-modified-marker " ● ")
+;;   (centaur-tabs-cycle-scope 'tabs)
+;;   (centaur-tabs-height 30)
+;;   (centaur-tabs-set-icons t)
+;;   (centaur-tabs-close-button " × ")
+;;   :config
+;;   (centaur-tabs-mode +1)
+;;   (centaur-tabs-headline-match)
+;;   (centaur-tabs-group-by-projectile-project)
+;;   (when (member "Arial" (font-family-list))
+;;     (centaur-tabs-change-fonts "Arial" 130)))
+
+;; (use-package highlight-symbol
+;;   :ensure t
+;;   :hook (prog-mode . highlight-symbol-mode)
+;;   :custom
+;;   (high light-symbol-idle-delay 0.3))
+
+(use-package highlight-numbers
+  :ensure t
+  :hook (prog-mode . highlight-numbers-mode))
+
+(use-package highlight-operators
+  :ensure t
+  :hook (prog-mode . highlight-operators-mode))
+
+(use-package highlight-escape-sequences
+  :ensure t
+  :hook (prog-mode . hes-mode))
+;; END HERE
+
 ;; If you find an error, ag needs to be installed from terminal as well.
 ;; homebrew install the_silver_searcher for macs
 ;; sudo apt-get install silversearcher-ag from ubuntu
 
-  ;; Helm search for projectile. Allows to search for files within a project
-  (use-package helm-projectile
-    :ensure t
-    :config
-    (helm-projectile-on))
-  
-  ;; Needed by helm-projectile for esearch
-  (use-package helm-ag
-    :ensure t)
+;; Helm search for projectile. Allows to search for files within a project
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on))
 
-  (use-package projectile
-    :ensure t
-    :bind ("C-c p" . projectile-command-map)
-    :config
-    (projectile-global-mode)
+;; Needed by helm-projectile for esearch
+(use-package helm-ag
+  :ensure t)
+
+(use-package projectile
+  :ensure t
+  :bind ("C-c p" . projectile-command-map)
+  :config
+  (projectile-global-mode)
   (setq projectile-completion-system 'helm)
   (setq projectile-switch-project-action 'helm-projectile))
+(projectile-discover-projects-in-directory "~/repositories/")
 
-
-    ;; (use-package counsel-projectile
-    ;; :ensure t
-    ;; :config
-    ;; ;; (counsel-projectile-mode))
+;; (use-package counsel-projectile
+;; :ensure t
+;; :config
+;; ;; (counsel-projectile-mode))
 
 (use-package ess
   :ensure t
-  :init (require 'ess-site))
+  :config
+  ;; Add latex symbol completion in julia buffer mode as well.
+  (add-hook 'ess-julia-mode-hook
+	    (lambda()
+	      (add-hook 'completion-at-point-functions
+			'ess-julia-latexsub-completion nil 'local)))
+  (setq tab-always-indent 'complete))
 
 (use-package poly-R
   :ensure t)
@@ -299,6 +402,7 @@
 ;; ESS doesn't slow down Emacs
 ;; (setq ess-eval-visibly 'nowait) ;; in 12.09-1
 (setq ess-eval-visibly nil)
+(setq ess-eval-visibly-p nil)
 ;; Smartparens in R repl.
 (add-hook 'ess-R-post-run-hook (lambda () (smartparens-mode 1)))
 (add-hook 'inferior-ess-mode-hook (lambda () (smartparens-mode 1)))
@@ -444,6 +548,86 @@
   (insert (concat "```{r " header "}\n\n```"))
   (forward-line -1))
 
+(require 'ess-site)
+
+(defun text-around-cursor (&optional rows-around)
+  (let ((rows-around (or rows-around 10))
+	(current-line (line-number-at-pos))
+	(initial-point (point)))
+    (save-mark-and-excursion
+      (goto-line (- current-line rows-around))
+      (set-mark (point))
+      (goto-line (+ current-line rows-around))
+      (end-of-line)
+      ;; Return a list of text, index
+      (list (buffer-substring-no-properties (mark) (point))
+	    (+ (- initial-point (mark)) 1)))))
+
+(defun strip-ess-output-junk (r-buffer)
+  (with-current-buffer r-buffer
+    (goto-char (point-min))
+    (while (re-search-forward "\\+\s" nil t)
+      (replace-match ""))))
+
+(defun exec-r-fn-to-buffer (r_fn text)
+  (let ((r-process (ess-get-process))
+	(r-output-buffer (get-buffer-create "*R-output*")))
+    (ess-string-command
+     (format "cat(%s(%s))\n" r_fn text)
+     r-output-buffer nil)
+    (strip-ess-output-junk r-output-buffer)
+    (save-mark-and-excursion
+      (goto-char (point-max))
+      (newline)
+      (insert-buffer r-output-buffer))))
+
+;; fnmate functions for keybindings
+(defun fnmate ()
+  (interactive)
+  (let* ((input-context (text-around-cursor))
+	 (text (prin1-to-string (car input-context)))
+	 (index (cdr input-context)))
+    (ess-eval-linewise (format "fnmate::fnmate_fn.R(%s, %s)" text index))))
+
+(defun fnmate-below ()
+  (interactive)
+  (let* ((input-context (text-around-cursor))
+	 (text (prin1-to-string (car input-context)))
+	 (index (cdr input-context))
+	 (args (format "%s, %s" text index)))
+    (exec-r-fn-to-buffer "fnmate::fnmate_below" args)))
+
+(define-key ess-mode-map (kbd "C-c C-e C-f") 'fnmate)
+
+(defun ess-drake-rmake ()
+  "Interface for drake::r_make"
+  (interactive)
+  (inferior-ess-r-force)
+  (ess-eval-linewise
+   "drake::r_make()"))
+
+(define-key ess-mode-map (kbd "C-c C-e m") 'ess-drake-rmake)
+(define-key ess-mode-map (kbd "C-c C-e C-m") 'ess-drake-rmake)
+
+
+(defun ess-drake-loadd ()
+  "Interface for drake::loadd"
+  (interactive)
+  (inferior-ess-r-force)
+  (ess-eval-linewise
+   "drake::loadd()"))
+
+(define-key ess-mode-map (kbd "C-c C-e p") 'ess-drake-loadd)
+(define-key ess-mode-map (kbd "C-c C-e C-p") 'ess-drake-loadd)
+
+(defun ess-drake-readd ()
+  "Interface for drake::readd"
+  (interactive)
+    (ess-eval-linewise (format "%s <- drake::readd(%s)" (current-word) (current-word))))
+
+(define-key ess-mode-map (kbd "C-c C-e o") 'ess-drake-readd)
+(define-key ess-mode-map (kbd "C-c C-e C-o") 'ess-drake-readd)
+
 (use-package stan-mode
      :ensure t
      :init (require 'stan-mode))
@@ -455,67 +639,88 @@
 (setq stan-use-auto-complete t)
 
 (use-package magit
-      :ensure t
-      :init
-      (progn
-      (bind-key "C-x g" 'magit-status)
-      ))
+  :ensure t
+  :init
+  (progn
+    (bind-key "C-x g" 'magit-status)
+    ))
 
 (define-key magit-mode-map (kbd "<tab>") 'magit-section-toggle)
 
 
-  ;; (setq magit-status-margin
-  ;;   '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
-  ;;     (use-package git-gutter
-  ;;     :ensure t
-  ;;     :init
-  ;;     (global-git-gutter-mode +1))
+;; (setq magit-status-margin
+;;   '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
+;;     (use-package git-gutter
+;;     :ensure t
+;;     :init
+;;     (global-git-gutter-mode +1))
 
-  ;;     (global-set-key (kbd "M-g M-g") 'hydra-git-gutter/body)
+;;     (global-set-key (kbd "M-g M-g") 'hydra-git-gutter/body)
 
 
-  ;;     (use-package git-timemachine
-  ;;     :ensure t
-  ;;     )
-  ;;   (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1)
-  ;; 			      :hint nil)
-  ;;     "
-  ;;   Git gutter:
-  ;;     _j_: next hunk        _s_tage hunk     _q_uit
-  ;;     _k_: previous hunk    _r_evert hunk    _Q_uit and deactivate git-gutter
-  ;;     ^ ^                   _p_opup hunk
-  ;;     _h_: first hunk
-  ;;     _l_: last hunk        set start _R_evision
-  ;;   "
-  ;;     ("j" git-gutter:next-hunk)
-  ;;     ("k" git-gutter:previous-hunk)
-  ;;     ("h" (progn (goto-char (point-min))
-  ;; 		(git-gutter:next-hunk 1)))
-  ;;     ("l" (progn (goto-char (point-min))
-  ;; 		(git-gutter:previous-hunk 1)))
-  ;;     ("s" git-gutter:stage-hunk)
-  ;;     ("r" git-gutter:revert-hunk)
-  ;;     ("p" git-gutter:popup-hunk)
-  ;;     ("R" git-gutter:set-start-revision)
-  ;;     ("q" nil :color blue)
-  ;;     ("Q" (progn (git-gutter-mode -1)
-  ;; 		;; git-gutter-fringe doesn't seem to
-  ;; 		;; clear the markup right away
-  ;; 		(sit-for 0.1)
-  ;; 		(git-gutter:clear))
-  ;; 	 :color blue))
+;;     (use-package git-timemachine
+;;     :ensure t
+;;     )
+;;   (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1)
+;; 			      :hint nil)
+;;     "
+;;   Git gutter:
+;;     _j_: next hunk        _s_tage hunk     _q_uit
+;;     _k_: previous hunk    _r_evert hunk    _Q_uit and deactivate git-gutter
+;;     ^ ^                   _p_opup hunk
+;;     _h_: first hunk
+;;     _l_: last hunk        set start _R_evision
+;;   "
+;;     ("j" git-gutter:next-hunk)
+;;     ("k" git-gutter:previous-hunk)
+;;     ("h" (progn (goto-char (point-min))
+;; 		(git-gutter:next-hunk 1)))
+;;     ("l" (progn (goto-char (point-min))
+;; 		(git-gutter:previous-hunk 1)))
+;;     ("s" git-gutter:stage-hunk)
+;;     ("r" git-gutter:revert-hunk)
+;;     ("p" git-gutter:popup-hunk)
+;;     ("R" git-gutter:set-start-revision)
+;;     ("q" nil :color blue)
+;;     ("Q" (progn (git-gutter-mode -1)
+;; 		;; git-gutter-fringe doesn't seem to
+;; 		;; clear the markup right away
+;; 		(sit-for 0.1)
+;; 		(git-gutter:clear))
+;; 	 :color blue))
+
+
+;; (use-package git-gutter
+;;   :ensure t
+;;   :custom
+;;   (git-gutter:update-interval 0.05))
+
+;; (use-package git-gutter-fringe
+;;   :ensure t
+;;   :config
+;;   (global-git-gutter-mode +1)
+;;   (setq-default fringes-outside-margins t)
+;;   (define-fringe-bitmap 'git-gutter-fr:added [224]
+;;     nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:modified [224]
+;;     nil nil '(center repeated))
+;;   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
+;;     nil nil 'bottom))
 
 ;; You had some problems making sure elpy had autocompletion in both
 ;; script and inferior python. This was due to elpy have python2.7 in
 ;; RPC Python in elpy-config (in Emacs) where it should have python3.
 ;; Both Interactive Python and RPC Python should have python3.
-(setq python-shell-interpreter "python3")
-(setq elpy-rpc-python-command "python3")
+(setq python-shell-interpreter "python3.8")
+(setq elpy-rpc-python-command "python3.8")
 
 (use-package elpy
   :ensure t
   :init
   (elpy-enable))
+
+(setq indent-tabs-mode nil)
+(setenv "WORKON_HOME" "~/miniconda3/envs/")
 
 (defun assign_python_operator ()
   "Python - Insert = operator"
@@ -541,23 +746,42 @@
 
 (global-set-key (kbd "C-x 7") 'python-scratch)
 
+(defun py-eval-region-or-line-and-step ()
+  (interactive)
+  (if (and transient-mark-mode mark-active
+	   (> (region-end) (region-beginning)))
+      (elpy-shell-send-region-or-buffer)
+    (progn
+      (end-of-line)
+      (let ((eol (point)))
+	(beginning-of-line)
+	(python-shell-send-region (point) eol))
+      (python-nav-forward-statement)
+      )))
+
+;; Map py-eval-region-or-line-and-step to M-ret because that's how I have it set
+;; for ESS
+(define-key python-mode-map (kbd "C-<return>") 'py-eval-region-or-line-and-step)
+
 (use-package yasnippet
   :ensure t
   :init
     (yas-global-mode 1))
 
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
+;; (use-package flycheck
+;;   :ensure t
+;;   :init (global-flycheck-mode))
 
-'(flycheck-lintr-caching nil) ;; need to customised it inside of Emacs
-(add-hook 'ess-mode-hook
-	  (lambda () (flycheck-mode t)))
+;; '(flycheck-lintr-caching nil) ;; need to customised it inside of Emacs
+;; (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
+;; '(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
+;; '(flycheck-idle-change-delay 100) ;; Set delay based on what suits you the best
 
-'(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
-'(flycheck-idle-change-delay 4) ;; Set delay based on what suits you the best
 
-;; In case you want to add flycheck every time you save.
+;; '(flyche ck-check-syntax-automatically (quote '(save mode-enable)))
+;; '(flycheck-idle-change-delay 4) ;; Set delay based on what suits you the best
+
+;  In case you want to add flycheck every time you save.
 ;; (setq flycheck-check-syntax-automatically '(save mode-enable))
 ;; the default value was '(save idle-change new-line mode-enabled)
 
@@ -570,22 +794,34 @@
 
 ;; Go https://console.developers.google.com/apis/credentials/oauthclient/672622840611-q5j91p8rojnjf5sghgvems2kjkhslg9v.apps.googleusercontent.com?project=emacs-gcal-251211&folder&organizationId
 ;; to find your client-id and client-secret
-;; I stored both these in txt files on my Drive for security reasons
+;; The MELPA org-gcal doesn't seem to work at this point for me so I'm using the original org-gcal from https://github.com/myuhe/org-gcal.el
+;; What I do is just download this file: https://github.com/myuhe/org-gcal.el/blob/master/org-gcal.el and then install it with
+;; M-x package-install-file and then everything should be ok.
+
+;; (use-package org-gcal
+;;    :ensure t
+;;    :config
+;;    ;; I stored both these in txt files on my Drive for security reasons
+;;    (setq org-gcal-client-id (when (file-exists-p "~/google_drive/gtd/")
+;; 			       (load "~/google_drive/gtd/client_id.txt"))
+;;       org-gcal-client-secret (when (file-exists-p "~/google_drive/gtd/")
+;; 			       (load "~/google_drive/gtd/client_secret.txt")) 
+;;       org-gcal-file-alist '(("cimentadaj@gmail.com" . "~/google_drive/gtd/gcal.org"))))
 
 (use-package org-gcal
    :ensure t
    :config
-   (setq org-gcal-client-id (when (file-exists-p "~/google_drive/gtd/")
-   			       (load "~/google_drive/gtd/client_id.txt"))
-      org-gcal-client-secret (when (file-exists-p "~/google_drive/gtd/")
-   			       (load "~/google_drive/gtd/client_secret.txt")) 
+   ;; I stored both these in txt files on my Drive for security reasons
+   (setq org-gcal-client-id "672622840611-q5j91p8rojnjf5sghgvems2kjkhslg9v.apps.googleusercontent.com"
+      org-gcal-client-secret "M7eqO_zAKYlReZVOx-2GGxlc"
       org-gcal-file-alist '(("cimentadaj@gmail.com" . "~/google_drive/gtd/gcal.org"))))
 
- (setq package-check-signature nil)
- (setq org-gcal-notify-p nil)
 
- (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
- (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+(setq package-check-signature nil)
+(setq org-gcal-notify-p nil)
+
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 
 (defun go-to-projects ()
   (interactive)
@@ -643,7 +879,147 @@
 ;;  space and then search for next comma:
 ;;  to ident columns such as in dplyr::select or arguments in function
 
- ;; (fset 'sc
- ;;    [return ?\C-s ?, return])
+;; (fset 'sc
+;;    [return ?\C-s ?, return])
 
- ;; (global-set-key (kbd "M-<f3>") 'sc)
+;; (global-set-key (kbd "M-<f3>") 'sc)
+
+(setq inferior-julia-program-name "/home/jorge/julia-1.3.1/bin/julia")
+
+(defun jl-scratch ()
+  (interactive)
+  (progn
+    (delete-other-windows)
+    (setq new-buf (get-buffer-create "scratch.jl"))
+    (switch-to-buffer new-buf)
+    (julia-mode)
+    (setq w1 (selected-window))
+    (setq w1name (buffer-name))
+    (setq w2 (split-window w1 nil t))
+    (if (not (member "*julia*" (mapcar (function buffer-name) (buffer-list))))
+	(julia))
+    (set-window-buffer w2 "*julia*")
+    (set-window-buffer w1 w1name)))
+
+(global-set-key (kbd "C-x 6") 'jl-scratch)
+
+(use-package julia-mode
+  :ensure t)
+
+(use-package flycheck-julia
+  :ensure t
+  :init
+  (add-hook 'ess-julia-mode-hook #'flycheck-julia-setup))
+
+(use-package julia-repl
+  :ensure t
+  :init
+  (with-eval-after-load 'julia-mode
+    (add-hook 'flycheck-mode-hook #'flycheck-julia-setup)))
+
+(setq julia-repl-executable-records
+      '((default "/home/jorge/julia-1.3.1/bin/julia")))
+
+;; (add-to-list 'load-path "/home/jorge/julia-1.3.1/bin/julia")
+;; (add-hook 'julia-mode-hook 'julia-repl-mode)
+
+;; (use-package dash
+;;   :ensure t
+;;   :init (require 'dash))
+
+;; (use-package s
+;;   :ensure t
+;;   :init (require 's))
+
+;; (use-package all-the-icons
+;;   :ensure t
+;;   :init (require 'all-the-icons))
+
+;; (defmacro with-face (STR &rest PROPS)
+;;   "Return STR propertized with PROPS."
+;;   `(propertize ,STR 'face (list ,@PROPS)))
+
+;; (defmacro esh-section (NAME ICON FORM &rest PROPS)
+;;   "Build eshell section NAME with ICON prepended to evaled FORM with PROPS."
+;;   `(setq ,NAME
+;; 	 (lambda () (when ,FORM
+;; 		      (-> ,ICON
+;; 			  (concat esh-section-delim ,FORM)
+;; 			  (with-face ,@PROPS))))))
+
+;; (defun esh-acc (acc x)
+;;   "Accumulator for evaluating and concatenating esh-sections."
+;;   (--if-let (funcall x)
+;;       (if (s-blank? acc)
+;; 	  it
+;; 	(concat acc esh-sep it))
+;;     acc))
+
+;; (defun esh-prompt-func ()
+;;   "Build `eshell-prompt-function'"
+;;   (concat esh-header
+;; 	  (-reduce-from 'esh-acc "" eshell-funcs)
+;; 	  "\n"
+;; 	  eshell-prompt-string))
+
+;; (esh-section esh-dir
+;; 	     "\xf07c"  ;  (faicon folder)
+;; 	     (abbreviate-file-name (eshell/pwd))
+;; 	     '(:foreground "gold" :bold ultra-bold :underline t))
+
+;; (esh-section esh-git
+;; 	     "\xe907"  ;  (git icon)
+;; 	     (magit-get-current-branch)
+;; 	     '(:foreground "pink"))
+
+;; ;; Separator between esh-sections
+;; (setq esh-sep "  ")  ; or " | "
+
+;; ;; Separator between an esh-section icon and form
+;; (setq esh-section-delim " ")
+
+;; ;; Eshell prompt header
+;; (setq esh-header "")  ; or "\n┌─"
+
+;; ;; Eshell prompt regexp and string. Unless you are varying the prompt by eg.
+;; ;; your login, these can be the same.
+;; (setq eshell-prompt-regexp " ")   ; or "└─> "
+;; (setq eshell-prompt-string " ")   ; or "└─> "
+
+;; ;; Choose which eshell-funcs to enable
+;; (setq eshell-funcs (list esh-dir esh-git))
+
+;; ;; Enable the new eshell prompt
+;; (setq eshell-prompt-function 'esh-prompt-func)
+
+(use-package docker-compose-mode
+  :ensure t)
+
+(use-package dockerfile-mode
+  :ensure t)
+
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+(put 'dockerfile-image-name 'safe-local-variable #'stringp)
+
+;; https://stat.ethz.ch/pipermail/ess-help/2017-April/012252.html
+
+;; (defun R-docker ()
+;;   (interactive)
+;;   (let ((ess-r-customize-alist
+;;          (append ess-r-customize-alist
+;;                  '((inferior-ess-program . "path/to/R-docker"))))
+;;         (ess-R-readline t))
+;;     (R)))
+
+(defun rename-file-and-buffer ()
+  "Rename the current buffer and file it is visiting."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+	(message "Buffer is not visiting a file!")
+      (let ((new-name (read-file-name "New name: " filename)))
+	(cond
+	 ((vc-backend filename) (vc-rename-file filename new-name))
+	 (t
+	  (rename-file filename new-name t)
+	  (set-visited-file-name new-name t t)))))))
