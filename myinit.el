@@ -598,6 +598,8 @@
     (exec-r-fn-to-buffer "fnmate::fnmate_below" args)))
 
 (define-key ess-mode-map (kbd "C-c C-e C-f") 'fnmate)
+(define-key ess-mode-map (kbd "C-c C-e f") 'fnmate)
+
 
 (defun ess-drake-rmake ()
   "Interface for drake::r_make"

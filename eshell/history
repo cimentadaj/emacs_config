@@ -1,128 +1,128 @@
-git pull
-cd covid_project/
-git pull
 ls
-rm -rf %
-git status
-cd ~/repositories/
-git clone https://github.com/cimentadaj/tune.git
-cat Margins/APR_age_by_country_all_poly_*
-cat Margins/APR_age_by_country_all_poly_de.csv
-git status
-cd ../Margins/
+rm -rf R
 ls
-ls old
-mv old/APR_overall_by_country_all_* ./
-ls
-mv old/APR_overall_by_country_work_poly_* ./
-mv old/APR_overall_by_country_gencom_* ./
-ls
-cd ..
-cd Margins/
-ls
-ls old/
-cd ~/repositories/
-git clone https://github.com/cimentadaj/covid_age.git
-git remote add upstream https://github.com/timriffe/covid_age.git
-git remote -v
-git pull upstream
-git push
-git status
-git pull upstream master
-git commit
-git commit -m "Merge with upstream repo"
-git push
-cd ~/repositories/
-ls
-git clone https://github.com/jlopezper/facebook_api_education.git
-ls
-ls -l
-ls -l -a
-rm -rf .Rhistory .secrets/
-ls
-cd data
-ls
-mv ouput_data.csv output_data.csv
-ls
-ls
-cd ..
+ls ../
 cd ..
 ls
-cd R
+cd .drake/
 ls
-rm -rf test.R
+git rm --cached config/ data/ drake/ keys/ scratch/
+git rm --cached -r config/ data/ drake/ keys/ scratch/
 ls
-rm -rf man/basepop.Rd 
-git rm .Rhistory
-cd ~/repositories/
-git clone https://github.com/cimentadaj/dials.git
-xdg-open .
-cd ~/repositories/
+git rm --cached -r config/ data/ drake/ keys/
 ls
-mkdir fb_gtrends
-cd fb_gtrends/
 ls
 mkdir data
-rm -rf compat-purrr.R 
-rm -rf compat-purrr.R 
-mkdir paper
-cd paper
-ls
-rm -rf paper.Rproj 
-cd paper
-ls
-cd measurementerror_paper/
-ls
-mv . ../
-ls
-ls
-mv ./* ../
+mv data/NUTS\ regions.xlsx  data/NUTS_regions.xlsx 
 ls
 cd ..
 ls
-rm -rf measurementerror_paper/
+ls -l
+cd .drake/
 ls
-mkdir figs
-ls
-cd paper/
-ls
-cd figs/
-ls
-cp simplecomplex.svg ../
+git rm --cached -rm config/ data/ drake/ keys/
+git rm --cached -r config/ data/ drake/ keys/
+git status
 cd ..
+git status
+cd .drake/
 ls
-cd paper/
-ls
-rm simplecomplex.svg 
-cd figs/
-ls
-unzip svgtopng.zip 
-ls
-rm svgtopng.zip 
-xdg-open .
-cd ..
-ls
-cd paper/
-ls
-cd figs/
-ls
-rm -rf *.svg
-ls
+git rm --cached -r config/ data/ drake/ keys/
+git status
+cd ~/repositories/labormarket_covid/
+git status
+git log
 cd ~/repositories/
-git clone https://github.com/cimentadaj/labormarket_covid.git
 cd labormarket_covid/
 ls
-R
-rm -rf R/my_new_function.R 
+fit status
+git status
+git lg
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+Welcome to the Emacs shell
+Welcome to the Emacs shell
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+cd tidyflow/
+cd ..
+bash commit.sh 
+bash commit.sh 
+ls
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+cd tune/
+cd ..
+ls
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+cd ~/repositories/
+ls
+mv commit.sh ../
 ls
 cd ..
 ls
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+rm -rf ~/repositories/data/ ~/repositories/figs ~/repositories/test
+bash commit.sh 
+rm -rf ~/repositories/hannahs_mtmm/
+cd ~/repositories/corona_survey_tracker/
+ls
+git init
+git status
+touch .gitignore
+nano .gitignore
+cd ~/repositories/
+ls
+cd corona_survey_tracker/
+git status
+git status
+git status
+git status
+git status
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/cimentadaj/corona_survey_tracker.git
+git push -u origin master
 cd ..
 ls
-cd R/
+cd fb_gtrends/
+git init
+git add .
+git commit -m "First commit"
+git remote add origin https://github.com/cimentadaj/fb_gtrends.git
+git push
+git push --set-upstream origin master
+cd ~
 ls
-rm -rf R
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+cd ~/repositories/fespain/
+ls raw_data/shape_files_censustract/
 ls
-ls
-rm -rf R
-ls
+ls raw_data/shape_files_censustract/
+ls -a raw_data/shape_files_censustract/
+ls -l raw_data/shape_files_censustract/
+ls -l --block-size=M raw_data/shape_files_censustract/
+git filter-branch --tree-filter "rm -rf raw_data/" --prune-empty HEAD
+git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d
+echo raw_data/ >> .gitignore
+git status
+git add .
+git commit -m "Removes raw_data from history"
+git gc
+git push origin master --force
+git pull
