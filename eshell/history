@@ -1,0 +1,128 @@
+ls
+rm -rf R
+ls
+ls ../
+cd ..
+ls
+cd .drake/
+ls
+git rm --cached config/ data/ drake/ keys/ scratch/
+git rm --cached -r config/ data/ drake/ keys/ scratch/
+ls
+git rm --cached -r config/ data/ drake/ keys/
+ls
+ls
+mkdir data
+mv data/NUTS\ regions.xlsx  data/NUTS_regions.xlsx 
+ls
+cd ..
+ls
+ls -l
+cd .drake/
+ls
+git rm --cached -rm config/ data/ drake/ keys/
+git rm --cached -r config/ data/ drake/ keys/
+git status
+cd ..
+git status
+cd .drake/
+ls
+git rm --cached -r config/ data/ drake/ keys/
+git status
+cd ~/repositories/labormarket_covid/
+git status
+git log
+cd ~/repositories/
+cd labormarket_covid/
+ls
+fit status
+git status
+git lg
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+Welcome to the Emacs shell
+Welcome to the Emacs shell
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+cd tidyflow/
+cd ..
+bash commit.sh 
+bash commit.sh 
+ls
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+cd tune/
+cd ..
+ls
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+cd ~/repositories/
+ls
+mv commit.sh ../
+ls
+cd ..
+ls
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+rm -rf ~/repositories/data/ ~/repositories/figs ~/repositories/test
+bash commit.sh 
+rm -rf ~/repositories/hannahs_mtmm/
+cd ~/repositories/corona_survey_tracker/
+ls
+git init
+git status
+touch .gitignore
+nano .gitignore
+cd ~/repositories/
+ls
+cd corona_survey_tracker/
+git status
+git status
+git status
+git status
+git status
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/cimentadaj/corona_survey_tracker.git
+git push -u origin master
+cd ..
+ls
+cd fb_gtrends/
+git init
+git add .
+git commit -m "First commit"
+git remote add origin https://github.com/cimentadaj/fb_gtrends.git
+git push
+git push --set-upstream origin master
+cd ~
+ls
+bash commit.sh 
+bash commit.sh 
+bash commit.sh 
+cd ~/repositories/fespain/
+ls raw_data/shape_files_censustract/
+ls
+ls raw_data/shape_files_censustract/
+ls -a raw_data/shape_files_censustract/
+ls -l raw_data/shape_files_censustract/
+ls -l --block-size=M raw_data/shape_files_censustract/
+git filter-branch --tree-filter "rm -rf raw_data/" --prune-empty HEAD
+git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d
+echo raw_data/ >> .gitignore
+git status
+git add .
+git commit -m "Removes raw_data from history"
+git gc
+git push origin master --force
+git pull

@@ -1,0 +1,239 @@
+****************************************************************************************************
+org-mode
+****************************************************************************************************
+
+* C-h t Enter tutorial 
+* C-RET enters a heading or a subheading depending on where you are
+* C-S-RET Enter a TODO task
+* C-c / t to see all TODO tasks
+* S-Tab for opening/closing all tasks
+* C-u C-c # (including the #) to update all task boxes
+* S-UP para asignar
+* M-S-RET para introducir un checkbox
+* C-c C-l to create a link
+* <DEL> to view the markup of the link
+* C-c C-o to click on the link
+* <s then TAB, to create a code block
+* M-x eval region to evaluate an emacs lisp region
+* To store another file link (or specific place in the article), go to the article and C-c l, then go to where you want to put the link and press C-c C-l
+* C-c C-n (org-next-visible-heading) Next heading.
+* C-c C-p (org-previous-visible-heading) Previous heading.
+* C-c C-b (org-backward-heading-same-level) Previous heading same level.
+* C-c C-u (outline-up-heading) Backward to higher level heading.
+* ALT- -> or <- to decrease levels
+* M-x org-archive-set-tag para poner el tag de archived
+
+
+Condensced org-mode tutorial: https://orgmode.org/orgguide.pdf
+
+****************************************************************************************************
+ESS
+****************************************************************************************************
+* C-c M-o cleans console
+* Shift-enter to execute R code
+* C-c C-e C-r restarts R
+* C-M-\ to indent region - this doesn't indent as I want it but at least it works
+* C-c C-v and type name of function to show help file
+* M-n-e then choose which format you'd like to export
+* C-c C-s opens a temporary buffer with the search of all packages
+* C-c C-x to see all currently created objects in the session
+* M-r to search through the history with a regex
+* C-c M-l will source the current .R file (only showing the output) but if run from the inferior process, can run any file
+* C-c C-j runs a line and switches to the ESS process
+* C-c M-f runs a function and switches to the ESS process
+* C-c M-r runs a region and switches to the ESS process
+* C-c M-b runs the complete R script and switches to the ESS process
+* C-c C-e C-d to open R function in a new temporary file
+* C-c C-. d change directory
+
+
+****************************************************************************************************
+Helm-projectile
+****************************************************************************************************
+C-c p-p to switch projects
+C-c p-f to navigate files within a project
+C-c p-s-s to search for regex within a project
+C-c p-r to replace string across a project. y will replace, n will go to next and Y will replace all instances in all buffers
+C-c p-I to open IBuffer on that project
+C-c p-V to list all projects with edited/uncommited files from Git
+
+****************************************************************************************************
+EMACS
+****************************************************************************************************
+
+* C-h t enters EMACS tutorial
+* C-v moves half a page down
+* M-v moves half a page up
+* C-l center the screen on where the cursor is
+* C-n next line
+* C-p previous line
+* C-f next character
+* C-b before character
+* M-f next word
+* M-b before word
+
+* C-a beginning of line
+* C-e end of line
+* M-a Beginning of sentence
+* M-e end of sentence
+
+* M-< To go to the beginning of document
+* M-> To go to the end of document
+
+*C-u NUMBER any command to repear N number of times
+
+* M-{ moves to the beginning of the parapgraph
+* M-} moves to the end of the paragraph
+* M-DEL deletes the previous word
+* M-d deletes the forward word
+
+	<DEL>        Delete the character just before the cursor
+	C-d   	     Delete the next character after the cursor
+
+	M-<DEL>      Kill the word immediately before the cursor
+	M-d	     Kill the next word after the cursor
+
+	C-k	     Kill from the cursor position to end of line
+	M-k	     Kill to the end of the current sentence
+
+These last ones are very interesting. C-k, as I already knew, deletes a complete line.
+However, M-k deletes a complete sentence.
+
+M-h selected the complete paragraph
+
+- C-w kills some text
+This means that the text is now yanked and can be reinserted with 
+
+* C-x C-c restarts emacs
+* C-x C-; to comment a line and un comment it
+* C-x C-s saves the current buffer
+* C-x s saves all buffers
+
+
+	C-x C-f		Find file
+	C-x C-s		Save file
+	C-x s		Save some buffers
+	C-x C-b		List buffers
+	C-x b		Switch buffer
+	C-x C-c		Quit Emacs
+	C-x 1		Delete all but one window
+	C-x u		Undo
+
+
+M-x replace-string replaces a word by another
+
+
+If you are going to be editing human-language text, such as this file,
+you should probably use Text Mode.
+
+>> Type M-x text-mode <Return>.
+To view documentation on your current major mode, type C-h m.
+
+>> Type M-x auto-fill-mode <Return> now.  Then insert a line of "asdf
+   " over again until you see it divide into two lines.  You must put
+   in spaces between them because Auto Fill breaks lines only at
+   spaces.
+
+
+>> Type C-x f with an argument of 20.  (C-u 2 0 C-x f).  Then type in
+   some text and see Emacs fill lines of 20 characters with it.  Then
+   set the margin back to 70 using C-x f again.
+
+If you make changes in the middle of a paragraph, Auto Fill mode does
+not re-fill it for you.  To re-fill the paragraph, type M-q (META-q)
+with the cursor inside that paragraph.
+
+To search for strings you use:
+* C-s to search below the cursor
+* C-r to search above the cursor
+
+Whenever you're typing, C-s or C-r goes to the next match and DEL goes
+back to the previous match. Type return to end the search
+
+
+>> Now type C-x 2 which splits the screen into two windows.  Both
+   windows display this tutorial.  The editing cursor stays in the top
+   window.
+
+>> Type C-M-v to scroll the bottom window.  (If you do not have a real
+   META key, type <ESC> C-v.)
+
+>> Type C-x o ("o" for "other") to move the cursor to the bottom
+>> window.  Use C-v and M-v in the bottom window to scroll it.  Keep
+>> reading these directions in the top window.
+
+>> Type C-x o again to move the cursor back to the top window.  The
+   cursor in the top window is just where it was before.
+
+* C-x 2 to make a copy of your file in a window below
+* C-x 3 to make a copy of your file in a window next to the file
+
+Finally, you can also make a window next to your main windows but only
+reading a new file without making a copy of the one you have open this:
+* C-x 4 C-f and open the new file
+
+For getting help:
+
+>> Type C-h c A COMMAND
+
+where A COMMAND is any command. It will show you the equivalent
+function name from those shortcut keys. This is useful for a quick
+check of what the command is.
+
+>> Type C-h k A COMMAND This is the same as above, but it opens a new
+window with the documentation of this command
+
+
+>> Type C-h a word where a word is a word to search for in all
+function names. It's like a global search in all function names for
+the word that you're looking for.
+
+Type C-h r for the Emacs manual
+
+* C-x C-e to reload a file. It automatically tries to open the current
+file so just press enter.
+
+* C-x h to select the whole buffer
+
+
+
+* C-M-n forward-list Move forward over a parenthetical group
+
+* C-M-p backward-list Move backward over a parenthetical group
+
+* C-M-f forward-sexp Move forward over a balanced expression
+
+* C-M-b backward-sexp Move backward over a balanced expression
+
+* C-M-k kill-sexp Kill balanced expression forward
+
+* C-M-SPC mark-sexp Put the mark at the end of the sexp.
+
+* C-x c M-y will show the history of the kill ring with helm-show-kill-ring
+
+****************************************************************************************************
+marks, bookmarks and helm
+****************************************************************************************************
+
+* C-spc C-spc marks a region
+* C-u C-spc jumps to last region
+
+* C-x r m bookmark <RET> sets a Bookmark by the name of bookmark
+* helm-bookmarks searchers for any bookmarks
+* C-x r b to search for any bookmark
+
+****************************************************************************************************
+converting to cases, lower case, upper case
+****************************************************************************************************
+
+* M-l Convert following word to lower case (downcase-word).
+* M-u Convert following word to upper case (upcase-word).
+* M-c Capitalize the following word (capitalize-word).
+* C-x C-l Convert region to lower case (downcase-region).
+* C-x C-u Convert region to upper case (upcase-region). 
+
+
+****************************************************************************************************
+Rmarkdown usage
+****************************************************************************************************
+https://polymode.github.io/usage/
