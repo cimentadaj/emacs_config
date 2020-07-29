@@ -1,7 +1,0 @@
-#+Title: Steps to install my emacs configuration
-
-The entire config is in =~myinit.org~= with comments.
-
-1. Clone the repository into your =~/.emacs.d/= folder
-2. Change the home directory so it matches your home directory (they all start with =~=, so just search in ~myinit.org~)
-3. Load emacs.

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: chunk
-# key: chunk
-# --
-\`\`\`{r $1}
-$0
-\`\`\`
