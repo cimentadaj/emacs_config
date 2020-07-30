@@ -211,6 +211,8 @@ file so just press enter.
 
 * C-x c M-y will show the history of the kill ring with helm-show-kill-ring
 
+* M-Pageup/Pagedown to navigate the **other opened buffer**
+
 ****************************************************************************************************
 marks, bookmarks and helm
 ****************************************************************************************************
@@ -237,3 +239,5 @@ converting to cases, lower case, upper case
 Rmarkdown usage
 ****************************************************************************************************
 https://polymode.github.io/usage/
+
+
